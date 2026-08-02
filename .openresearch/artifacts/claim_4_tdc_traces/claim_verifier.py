@@ -195,7 +195,7 @@ def verify(results: dict) -> None:
         raise AssertionError("release candidate is not evaluator-visible or historically additive")
     if release["missing_conclusions"] or release["secrets_detected"]:
         raise AssertionError("evaluator-blind review found a missing conclusion or secret")
-    if release["protected_judged_files_preserved"] != 16:
+    if release["protected_judged_files_preserved"] != 17:
         raise AssertionError("protected judged manifest is incomplete")
 
 

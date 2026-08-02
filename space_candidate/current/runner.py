@@ -1043,6 +1043,55 @@ def run_mandatory_falsification_search() -> dict[str, object]:
             not any(bool(row["projection_or_clipping_used"]) for row in tdc_cells)
         ),
     }
+    controls = {
+        "unstable_fast_ode": unstable_detector_control(),
+        "rank_deficient_tdc_features": {
+            "accepted": False,
+            "reason": "F.2 violated",
+            "detector_triggered": bool(
+                np.linalg.matrix_rank(np.column_stack([tdc_model["Phi"], tdc_model["Phi"][:, 0]]))
+                < int(tdc_model["features"]) + 1
+            ),
+        },
+        "projected_tdc_variant": {
+            "accepted": False,
+            "reason": "not the unprojected Definition 7.1 algorithm",
+            "detector_triggered": True,
+        },
+    }
+    return {
+        "route": 4,
+        "exact_claim_contracts": {
+            "1": "For every process satisfying B.1-B.7, sup_n ||z_n|| is finite on almost every sample path.",
+            "2": "For every process satisfying B.1-B.7, tracking and joint errors converge to zero on almost every sample path.",
+            "3": "For every process satisfying the Appendix B premises, one sample-path finite K bounds every n.",
+            "4": "Under Appendix F and inherited Appendix B premises, exact unprojected TDC(lambda) converges almost surely under off-policy Markov sampling.",
+        },
+        "source_anchors": {
+            "1": "Theorem 3.2 / #S3.Thmtheorem2",
+            "2": "Theorem 3.3 / #S3.Thmtheorem3",
+            "3": "Lemma 3.1 / #S3.Thmtheorem1",
+            "4": "Definition 7.1 and Theorem 7.2 / #S7.Thmtheorem1 and #S7.Thmtheorem2",
+        },
+        "sa_search": {
+            "selection_rule": "promote the largest tail norm slope, breaking ties by maximum norm growth",
+            "search_cells": search_cells,
+            "holdout_cells": holdout_cells,
+            "first_hit_threshold": "10 times the initial joint norm",
+        },
+        "tdc_search": {
+            "lambdas": list(tdc_lambdas),
+            "cells": tdc_cells,
+            "assumptions": tdc_assumptions,
+            "all_assumptions_satisfied": all(tdc_assumptions.values()),
+            "max_importance_ratio": max(float(row["max_importance_ratio"]) for row in tdc_cells),
+            "max_trace_norm": max(float(row["max_eligibility_trace_norm"]) for row in tdc_cells),
+        },
+        "negative_controls": controls,
+        "valid_counterexample_found": False,
+        "scientific_verdicts": {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"},
+        "conclusion": "No valid assumption-satisfying counterexample was established. Finite searches cannot prove the universal claims, so all four remain BLOCKED.",
+    }
 
 
 def release_candidate_gate() -> dict[str, object]:
@@ -1182,57 +1231,6 @@ def release_candidate_gate() -> dict[str, object]:
         "secrets_detected": False,
         "old_file_set_subset": True,
     }
-    controls = {
-        "unstable_fast_ode": unstable_detector_control(),
-        "rank_deficient_tdc_features": {
-            "accepted": False,
-            "reason": "F.2 violated",
-            "detector_triggered": bool(
-                np.linalg.matrix_rank(np.column_stack([tdc_model["Phi"], tdc_model["Phi"][:, 0]]))
-                < int(tdc_model["features"]) + 1
-            ),
-        },
-        "projected_tdc_variant": {
-            "accepted": False,
-            "reason": "not the unprojected Definition 7.1 algorithm",
-            "detector_triggered": True,
-        },
-    }
-    return {
-        "route": 4,
-        "exact_claim_contracts": {
-            "1": "For every process satisfying B.1-B.7, sup_n ||z_n|| is finite on almost every sample path.",
-            "2": "For every process satisfying B.1-B.7, tracking and joint errors converge to zero on almost every sample path.",
-            "3": "For every process satisfying the Appendix B premises, one sample-path finite K bounds every n.",
-            "4": "Under Appendix F and inherited Appendix B premises, exact unprojected TDC(lambda) converges almost surely under off-policy Markov sampling.",
-        },
-        "source_anchors": {
-            "1": "Theorem 3.2 / #S3.Thmtheorem2",
-            "2": "Theorem 3.3 / #S3.Thmtheorem3",
-            "3": "Lemma 3.1 / #S3.Thmtheorem1",
-            "4": "Definition 7.1 and Theorem 7.2 / #S7.Thmtheorem1 and #S7.Thmtheorem2",
-        },
-        "sa_search": {
-            "selection_rule": "promote the largest tail norm slope, breaking ties by maximum norm growth",
-            "search_cells": search_cells,
-            "holdout_cells": holdout_cells,
-            "first_hit_threshold": "10 times the initial joint norm",
-        },
-        "tdc_search": {
-            "lambdas": list(tdc_lambdas),
-            "cells": tdc_cells,
-            "assumptions": tdc_assumptions,
-            "all_assumptions_satisfied": all(tdc_assumptions.values()),
-            "max_importance_ratio": max(float(row["max_importance_ratio"]) for row in tdc_cells),
-            "max_trace_norm": max(float(row["max_eligibility_trace_norm"]) for row in tdc_cells),
-        },
-        "negative_controls": controls,
-        "valid_counterexample_found": False,
-        "scientific_verdicts": {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"},
-        "conclusion": "No valid assumption-satisfying counterexample was established. Finite searches cannot prove the universal claims, so all four remain BLOCKED.",
-    }
-
-
 def main() -> None:
     started = time.perf_counter()
     machine = machine_info()
