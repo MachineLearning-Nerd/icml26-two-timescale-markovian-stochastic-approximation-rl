@@ -1,0 +1,7 @@
+{
+  "artifact_status": "Historical rejected baseline",
+  "judged_space": "DineshAI/Iww9TICvKj@ba24d26d274d66c8cdb627aa5a324b47d189dfe0",
+  "scope": "Reconstruct the judged d=3 linear SA and 5-state, 3-feature, lambda=0 TDC proxy. These finite checks are not contracts for the paper's universal almost-sure theorems.",
+  "expected_exit": "0 only if all five historical toy/proxy gates pass",
+  "scientific_verdict": "BLOCKED"
+}
