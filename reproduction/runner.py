@@ -695,7 +695,7 @@ def inspect_paper_source(tex: str) -> dict[str, object]:
         "B1_contains_unique_stationary_premise": "unique invariant probability measure" in tex[positions[0] - 100:positions[0] + 300],
         "B2_contains_timescale_limit": "\\frac{\\beta(i)}{\\alpha(i)} = 0" in learning_block,
         "theorem_3_3_uses_full_assumption_range": theorem_dependency,
-        "tdc_proof_references_all_six": all(("assumption:" + label.split("assumption: ", 1)[-1]) in tdc_proof for label in labels),
+        "tdc_proof_references_all_six": all(label in tdc_proof for label in labels),
         "assumption_environment_count_in_appendix_B": tex[positions[0] - 30:positions[-1] + 300].count("\\begin{assumption}"),
     }
 
