@@ -519,13 +519,13 @@ def nonlinear_components(dimension: int, stickiness: float) -> dict[str, np.ndar
         "equilibrium_y": equilibrium_y,
         "noise_x": noise_x,
         "noise_y": noise_y,
-        "operator_norm_bound": float(np.max(diagonal) + 0.025),
+        "operator_norm_bound": float(np.max(diagonal) + 0.025 + 0.06),
     }
 
 
 def nonlinear_lambda(y: np.ndarray, components: dict[str, np.ndarray | float]) -> np.ndarray:
     linear = components["diagonal"] * y + 0.025 * np.roll(y, 1)
-    return linear + components["offset"] + 0.06 * np.tanh(y)
+    return linear + components["offset"] + 0.06 * np.abs(y)
 
 
 def run_nonlinear_sa(
@@ -553,7 +553,7 @@ def run_nonlinear_sa(
         beta = 0.52 / ((step + 40.0) ** 0.76)
         target_x = nonlinear_lambda(y, components)
         fast_drift = -(x - target_x) + components["noise_x"][state]
-        slow_drift = -(y - equilibrium_y) + 0.18 * np.tanh(x - target_x) + components["noise_y"][state]
+        slow_drift = -(y - equilibrium_y) + 0.18 * np.abs(x - target_x) + components["noise_y"][state]
         x += alpha * fast_drift
         y += beta * slow_drift
         max_y = max(max_y, float(np.linalg.norm(y)))
@@ -568,7 +568,6 @@ def run_nonlinear_sa(
     final_joint = float(np.linalg.norm(np.r_[x - equilibrium_x, y - equilibrium_y]))
     constant_bound = (
         float(np.linalg.norm(components["offset"]))
-        + 0.06 * math.sqrt(dimension)
         + float(np.max(np.linalg.norm(components["noise_x"], axis=1)))
     )
     certified_k = initial_x_norm + constant_bound + float(components["operator_norm_bound"])
@@ -620,7 +619,7 @@ def run_claims_1_2_3_5() -> dict[str, object]:
             "seeds": [4101, 4102],
             "steps_per_cell": 100_000,
             "cells": len(cells),
-            "nonlinear_equilibrium_map": "diag*y + 0.025*roll(y,1) + q + 0.06*tanh(y)",
+            "nonlinear_equilibrium_map": "diag*y + 0.025*roll(y,1) + q + 0.06*abs(y)",
         },
         "assumption_audit": {
             "B1_unique_stationary_distribution": all(row["stationarity_residual"] < 1e-12 and row["spectral_gap"] > 0 for row in cells),
@@ -634,7 +633,7 @@ def run_claims_1_2_3_5() -> dict[str, object]:
         "symbolic_certificates": {
             "fast_ode": "d/dt ||x-lambda(y)||^2 = -2||x-lambda(y)||^2 for fixed y",
             "reduced_slow_ode": "at x=lambda(y), dy/dt = -(y-y*)",
-            "infinity_fast_ode": "dx/dt = -(x-My), with eigenvalues -1",
+            "infinity_fast_ode": "dx/dt = -(x-My-0.06*abs(y)); for fixed y the x-Jacobian is -I",
             "infinity_reduced_slow_ode": "dy/dt = -y, with eigenvalues -1",
             "running_max_bound": "contractive fast recursion gives ||x_n|| <= K(1+max_{m<=n}||y_m||); each cell records a conservative certified K",
         },

@@ -22,6 +22,6 @@
       "numbering_note": "B.3 is rendered as a Remark, not an Assumption."
     }
   },
-  "route": "A nonlinear globally Lipschitz family is checked at dimensions 8, 32, and 64, three Markov mixing regimes, and two initial scales. Analytic certificates establish the equilibrium map, ODE stability, scaling limits, and a conservative running-maximum K for this family.",
+  "route": "A nonlinear globally Lipschitz family with a positively homogeneous absolute-value term is checked at dimensions 8, 32, and 64, three Markov mixing regimes, and two initial scales. Analytic certificates establish the equilibrium map, exact B.4 scaling factorization, ODE stability, scaling limits, and a conservative running-maximum K for this family.",
   "verdict_rule": "This route can corroborate and certify the constructed family but cannot verify the paper's universal theorem. Absent a general proof certificate or a valid counterexample, each theorem-level verdict is BLOCKED."
 }
