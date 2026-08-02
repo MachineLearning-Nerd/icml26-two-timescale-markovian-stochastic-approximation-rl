@@ -198,6 +198,16 @@ def verify(results: dict) -> None:
     if release["protected_judged_files_preserved"] != 17:
         raise AssertionError("protected judged manifest is incomplete")
 
+    published = results["post_publication_audit"]
+    if published["status"] != "PASS" or published["revision"] != "bec3336591285a901d33d2abba824f6e2bc31d8c":
+        raise AssertionError("post-publication audit did not verify the exact release")
+    if published["candidate_text_paths_byte_identical"] != 32:
+        raise AssertionError("published text allowlist is incomplete")
+    if published["protected_judged_files_hash_matched"] != 17:
+        raise AssertionError("published historical evidence does not match the judged revision")
+    if not published["current_verifier_obvious"] or published["missing_files"]:
+        raise AssertionError("published canonical traversal is incomplete")
+
 
 def main() -> None:
     if len(sys.argv) != 2:

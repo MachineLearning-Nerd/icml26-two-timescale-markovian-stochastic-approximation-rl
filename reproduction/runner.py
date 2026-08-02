@@ -20,7 +20,7 @@ import urllib.request
 import xml.etree.ElementTree as ET
 from copy import deepcopy
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("OMP_NUM_THREADS", "1")
@@ -1231,6 +1231,105 @@ def release_candidate_gate() -> dict[str, object]:
         "secrets_detected": False,
         "old_file_set_subset": True,
     }
+
+
+def post_publication_audit() -> dict[str, object]:
+    revision = "bec3336591285a901d33d2abba824f6e2bc31d8c"
+    candidate = ROOT / "space_candidate"
+    allowlist = [line for line in (candidate / "UPLOAD_ALLOWLIST.txt").read_text(encoding="utf-8").splitlines() if line]
+    protected_lines = (ROOT / ".openresearch/protected/JUDGED_SPACE_MANIFEST.sha256").read_text(encoding="utf-8").splitlines()
+    expected_protected = {
+        old_path.removeprefix("./"): digest
+        for digest, old_path in (line.split(maxsplit=1) for line in protected_lines)
+    }
+    downloaded: dict[str, bytes] = {}
+
+    def download(relative: str) -> bytes:
+        normalized = str(PurePosixPath(relative))
+        if normalized.startswith("../") or normalized == "..":
+            raise AssertionError(f"published traversal escapes the Space: {relative}")
+        if normalized not in downloaded:
+            url = f"https://huggingface.co/spaces/DineshAI/Iww9TICvKj/resolve/{revision}/{normalized}"
+            request = urllib.request.Request(url, headers={"User-Agent": "OpenResearch-Reproduction/1.0 (post-publication audit)"})
+            with urllib.request.urlopen(request, timeout=60) as response:
+                downloaded[normalized] = response.read()
+        return downloaded[normalized]
+
+    for relative in sorted(set(allowlist) | set(expected_protected)):
+        download(relative)
+    mismatched_uploads = [
+        relative for relative in allowlist if download(relative) != (candidate / relative).read_bytes()
+    ]
+    if mismatched_uploads:
+        raise AssertionError(f"published bytes differ from the frozen candidate: {mismatched_uploads}")
+    protected_mismatches = [
+        relative
+        for relative, expected in expected_protected.items()
+        if hashlib.sha256(download(relative)).hexdigest() != expected
+    ]
+    if protected_mismatches:
+        raise AssertionError(f"published judged evidence changed: {protected_mismatches}")
+
+    published_allowlist = download("UPLOAD_ALLOWLIST.txt").decode("utf-8").splitlines()
+    manifest = {}
+    for line in download("SHA256SUMS.txt").decode("utf-8").splitlines():
+        digest, relative = line.split(maxsplit=1)
+        manifest[relative] = digest
+    if set(manifest) != set(published_allowlist) - {"SHA256SUMS.txt"}:
+        raise AssertionError("published hash manifest and allowlist differ")
+    for relative, expected in manifest.items():
+        if hashlib.sha256(download(relative)).hexdigest() != expected:
+            raise AssertionError(f"published manifest hash mismatch: {relative}")
+
+    logbook = json.loads(download("logbook.json").decode("utf-8"))
+    if logbook["root"]["children"][0]["slug"] != "current-verification":
+        raise AssertionError("published current verifier is not first")
+    opened = {"README.md", "logbook.json", "pages/index.md"}
+
+    def collect_navigation(node: dict[str, object]) -> None:
+        opened.add(str(node["file"]))
+        for child in node.get("children", []):
+            collect_navigation(child)
+
+    collect_navigation(logbook["root"])
+    queue = list(opened)
+    markdown_link = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
+    while queue:
+        relative = queue.pop()
+        body = download(relative)
+        if PurePosixPath(relative).suffix.lower() not in {".md", ".py"}:
+            continue
+        for target in markdown_link.findall(body.decode("utf-8")):
+            if target.startswith(("http://", "https://", "#/", "#", "mailto:")):
+                continue
+            base = PurePosixPath(relative).parent
+            components: list[str] = []
+            for component in (base / target.split("#", 1)[0]).parts:
+                if component == "..":
+                    if not components:
+                        raise AssertionError(f"published link escapes the Space: {target}")
+                    components.pop()
+                elif component not in {"", "."}:
+                    components.append(component)
+            linked = "/".join(components)
+            if linked not in opened:
+                opened.add(linked)
+                queue.append(linked)
+
+    required_visible = {"current/runner.py", "current/verify.py", "checker/independent-checker.json"}
+    if not required_visible.issubset(opened):
+        raise AssertionError("published current verifier is not obvious from canonical traversal")
+    return {
+        "status": "PASS",
+        "space_id": "DineshAI/Iww9TICvKj",
+        "revision": revision,
+        "candidate_text_paths_byte_identical": len(allowlist),
+        "protected_judged_files_hash_matched": len(expected_protected),
+        "canonical_files_opened": sorted(opened),
+        "current_verifier_obvious": True,
+        "displayed_numbers_source": "published raw JSON matches the frozen candidate byte-for-byte",
+        "missing_files": [],
+    }
 def main() -> None:
     started = time.perf_counter()
     machine = machine_info()
@@ -1248,6 +1347,7 @@ def main() -> None:
         "proof_dependency_reconstruction": run_proof_dependency_reconstruction(),
         "mandatory_falsification_search": run_mandatory_falsification_search(),
         "release_candidate_gate": release_candidate_gate(),
+        "post_publication_audit": post_publication_audit(),
         "campaign_verdict": "BLOCKED",
     }
     results["runtime_seconds"] = time.perf_counter() - started
