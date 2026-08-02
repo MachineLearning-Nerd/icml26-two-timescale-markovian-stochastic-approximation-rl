@@ -1,0 +1,12 @@
+{
+  "route": 4,
+  "claims": {
+    "1": "For every B.1-B.7 process, sup_n ||z_n|| is finite almost surely.",
+    "2": "For every B.1-B.7 process, tracking and joint error converge to zero almost surely.",
+    "3": "For every Appendix B process, one sample-path finite K bounds all n.",
+    "4": "Under Appendix F and inherited Appendix B premises, exact unprojected TDC(lambda) converges almost surely under off-policy Markov sampling."
+  },
+  "falsification_rule": "FALSIFIED only if a counterexample satisfies every premise and mathematically contradicts the exact quantified statement. Finite growth, overflow, failed convergence, or an assumption violation is not falsification.",
+  "search": "Twelve nonnormal Markov SA cells across shear, mixing, and seed; two longer holdouts selected by a preregistered worst-tail rule; four high-importance-ratio positive-lambda TDC cells.",
+  "controls": ["unstable fast ODE", "rank-deficient TDC features", "projected TDC variant"]
+}

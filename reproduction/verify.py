@@ -148,6 +148,39 @@ def verify(results: dict) -> None:
         if row != {"accepted": False, "reason": reason}:
             raise AssertionError(f"proof-route negative control {name} did not fail")
 
+    falsification = results["mandatory_falsification_search"]
+    if falsification["route"] != 4:
+        raise AssertionError("mandatory falsification route is not identified as route 4")
+    sa_cells = falsification["sa_search"]["search_cells"]
+    holdouts = falsification["sa_search"]["holdout_cells"]
+    if len(sa_cells) != 12 or len(holdouts) != 2:
+        raise AssertionError("falsification SA search or holdout grid is incomplete")
+    if not all(row["all_assumptions_satisfied"] for row in sa_cells + holdouts):
+        raise AssertionError("an SA candidate violated the paper premises")
+    if any(row["projection_or_clipping_used"] for row in sa_cells + holdouts):
+        raise AssertionError("falsification SA search used projection or clipping")
+    if any(row["valid_counterexample"] for row in sa_cells + holdouts):
+        raise AssertionError("finite SA evidence was misrepresented as a counterexample")
+    tdc_search = falsification["tdc_search"]
+    if not tdc_search["all_assumptions_satisfied"]:
+        failed = sorted(name for name, passed in tdc_search["assumptions"].items() if not passed)
+        raise AssertionError(f"falsification TDC assumptions failed: {failed}")
+    if len(tdc_search["cells"]) != 4 or any(row["lambda"] <= 0 for row in tdc_search["cells"]):
+        raise AssertionError("falsification TDC trace grid is incomplete")
+    expected_falsification_controls = {
+        "unstable_fast_ode": "B.6 violated by unstable fast ODE",
+        "rank_deficient_tdc_features": "F.2 violated",
+        "projected_tdc_variant": "not the unprojected Definition 7.1 algorithm",
+    }
+    for name, reason in expected_falsification_controls.items():
+        row = falsification["negative_controls"][name]
+        if row["accepted"] or row["reason"] != reason or not row["detector_triggered"]:
+            raise AssertionError(f"falsification negative control {name} failed")
+    if falsification["valid_counterexample_found"]:
+        raise AssertionError("route reports an unsupported counterexample")
+    if falsification["scientific_verdicts"] != {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"}:
+        raise AssertionError("falsification verdicts do not follow the predeclared rule")
+
 
 def main() -> None:
     if len(sys.argv) != 2:

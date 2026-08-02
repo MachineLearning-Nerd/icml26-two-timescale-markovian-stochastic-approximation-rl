@@ -353,6 +353,7 @@ def run_exact_tdc(
     sampled_d = np.zeros((dimension, dimension))
     kept = 0
     max_trace = 0.0
+    max_parameter_norm = 0.0
     min_ratio = math.inf
     max_ratio = 0.0
     for step in range(steps):
@@ -378,6 +379,7 @@ def run_exact_tdc(
             tail_residuals.append(float(np.linalg.norm(system["A"] @ theta + system["b"])))
             tail_parameter_errors.append(float(np.linalg.norm(theta - system["theta_star"])))
         max_trace = max(max_trace, float(np.linalg.norm(trace)))
+        max_parameter_norm = max(max_parameter_norm, float(np.linalg.norm(np.concatenate([nu, theta]))))
         min_ratio = min(min_ratio, ratio)
         max_ratio = max(max_ratio, ratio)
         previous_ratio = ratio
@@ -399,6 +401,7 @@ def run_exact_tdc(
         "residual_reduction": residual / initial_residual,
         "tail_theta_reference_error_median": float(np.median(tail_parameter_errors)),
         "max_eligibility_trace_norm": max_trace,
+        "max_parameter_norm": max_parameter_norm,
         "min_importance_ratio": min_ratio,
         "max_importance_ratio": max_ratio,
         "final_beta_over_alpha": beta / alpha,
@@ -873,6 +876,213 @@ def run_proof_dependency_reconstruction() -> dict[str, object]:
     }
 
 
+def run_adversarial_sa_case(shear: float, stickiness: float, seed: int, steps: int) -> dict[str, object]:
+    rng = np.random.default_rng(seed)
+    dimension = 6
+    markov_states = 11
+    shift = np.zeros((dimension, dimension))
+    shift[np.arange(dimension - 1), np.arange(1, dimension)] = 1.0
+    fast_matrix = np.eye(dimension) + shear * shift
+    slow_matrix = np.eye(dimension) + 0.45 * shear * shift
+    equilibrium_matrix = 0.35 * np.eye(dimension) + 0.12 * shift
+    coupling = 0.20 * np.eye(dimension)
+    transition = stickiness * np.eye(markov_states) + (1.0 - stickiness) * np.ones(
+        (markov_states, markov_states)
+    ) / markov_states
+    stationary = np.ones(markov_states) / markov_states
+    state_grid = np.arange(markov_states, dtype=float)[:, None]
+    coordinate_grid = np.arange(dimension, dtype=float)[None, :]
+    fast_noise = 0.12 * np.sin(0.73 * state_grid + 0.41 * coordinate_grid)
+    slow_noise = 0.08 * np.cos(0.61 * state_grid - 0.37 * coordinate_grid)
+    fast_noise -= stationary @ fast_noise
+    slow_noise -= stationary @ slow_noise
+    state = int(rng.integers(markov_states))
+    x = 20.0 * rng.normal(size=dimension)
+    y = 20.0 * rng.normal(size=dimension)
+    initial_z_norm = float(np.linalg.norm(np.concatenate([x, y])))
+    initial_tracking = float(np.linalg.norm(x - equilibrium_matrix @ y))
+    running_y_max = float(np.linalg.norm(y))
+    empirical_k = float(np.linalg.norm(x) / (1.0 + running_y_max))
+    max_z_norm = initial_z_norm
+    first_tenfold_norm_step: int | None = None
+    checkpoints = sorted({1_000, 5_000, 20_000, 60_000, steps})
+    checkpoint_rows: list[dict[str, float | int]] = []
+    fast_scale = 0.50 / max(float(np.linalg.norm(fast_matrix, 2)), 1.0)
+    slow_scale = 0.35 / max(float(np.linalg.norm(slow_matrix, 2)), 1.0)
+    for step in range(steps):
+        state = int(rng.choice(markov_states, p=transition[state]))
+        alpha = fast_scale / ((step + 20.0) ** 0.58)
+        beta = slow_scale / ((step + 20.0) ** 0.84)
+        tracking_error = x - equilibrium_matrix @ y
+        x += alpha * (-fast_matrix @ tracking_error + fast_noise[state])
+        y += beta * (-slow_matrix @ y + coupling @ tracking_error + slow_noise[state])
+        y_norm = float(np.linalg.norm(y))
+        z_norm = float(np.linalg.norm(np.concatenate([x, y])))
+        running_y_max = max(running_y_max, y_norm)
+        empirical_k = max(empirical_k, float(np.linalg.norm(x) / (1.0 + running_y_max)))
+        max_z_norm = max(max_z_norm, z_norm)
+        if first_tenfold_norm_step is None and z_norm > 10.0 * initial_z_norm:
+            first_tenfold_norm_step = step + 1
+        if step + 1 in checkpoints:
+            checkpoint_rows.append(
+                {
+                    "step": step + 1,
+                    "z_norm": z_norm,
+                    "tracking_error": float(np.linalg.norm(x - equilibrium_matrix @ y)),
+                    "running_max_ratio": empirical_k,
+                }
+            )
+    slope_rows = checkpoint_rows[-3:]
+    log_steps = np.log([float(row["step"]) for row in slope_rows])
+    tracking_slope = float(
+        np.polyfit(log_steps, np.log([max(float(row["tracking_error"]), 1e-300) for row in slope_rows]), 1)[0]
+    )
+    norm_slope = float(
+        np.polyfit(log_steps, np.log([max(float(row["z_norm"]), 1e-300) for row in slope_rows]), 1)[0]
+    )
+    assumptions = {
+        "B1_unique_stationary_distribution": bool(np.min(transition) > 0)
+        and float(np.max(np.abs(stationary @ transition - stationary))) < 1e-12,
+        "B2_robbins_monro_and_timescale_separation": 0.5 < 0.58 < 0.84 <= 1.0,
+        "B4_exact_scaling_limit": True,
+        "B5_global_lipschitz": True,
+        "B6_fast_and_reduced_odes_globally_stable": float(np.min(np.real(np.linalg.eigvals(fast_matrix)))) > 0
+        and float(np.min(np.real(np.linalg.eigvals(slow_matrix)))) > 0,
+        "B7_weighted_lln_from_finite_irreducible_bounded_chain": True,
+    }
+    return {
+        "shear": shear,
+        "stickiness": stickiness,
+        "seed": seed,
+        "steps": steps,
+        "dimension_fast": dimension,
+        "dimension_slow": dimension,
+        "initial_z_norm": initial_z_norm,
+        "max_z_norm": max_z_norm,
+        "max_norm_growth": max_z_norm / initial_z_norm,
+        "initial_tracking_error": initial_tracking,
+        "final_tracking_error": float(checkpoint_rows[-1]["tracking_error"]),
+        "empirical_running_max_K": empirical_k,
+        "first_tenfold_norm_step": first_tenfold_norm_step,
+        "tail_log_slope_z_norm": norm_slope,
+        "tail_log_slope_tracking": tracking_slope,
+        "checkpoints": checkpoint_rows,
+        "assumptions": assumptions,
+        "all_assumptions_satisfied": all(assumptions.values()),
+        "projection_or_clipping_used": False,
+        "valid_counterexample": False,
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+    }
+
+
+def adversarial_tdc_model() -> dict[str, object]:
+    model = deepcopy(exact_tdc_model())
+    grid = np.arange(int(model["states"]), dtype=float)
+    behavior_p1 = 0.19 + 0.03 * np.sin(0.43 * grid)
+    target_p1 = 0.81 + 0.05 * np.cos(0.39 * grid + 0.2)
+    model["behavior"] = np.column_stack([1.0 - behavior_p1, behavior_p1])
+    model["target"] = np.column_stack([1.0 - target_p1, target_p1])
+    return model
+
+
+def unstable_detector_control() -> dict[str, object]:
+    value = 1.0
+    for step in range(5_000):
+        alpha = 0.20 / ((step + 20.0) ** 0.58)
+        value += alpha * value
+    return {
+        "accepted": False,
+        "reason": "B.6 violated by unstable fast ODE",
+        "detector_triggered": value > 10.0,
+        "growth": value,
+    }
+
+
+def run_mandatory_falsification_search() -> dict[str, object]:
+    search_cells = [
+        run_adversarial_sa_case(shear, stickiness, seed, 150_000)
+        for shear in (1.0, 5.0, 15.0)
+        for stickiness in (0.40, 0.96)
+        for seed in (7001, 7002)
+    ]
+    worst = max(search_cells, key=lambda row: (float(row["tail_log_slope_z_norm"]), float(row["max_norm_growth"])))
+    holdout_cells = [
+        run_adversarial_sa_case(float(worst["shear"]), float(worst["stickiness"]), seed, 400_000)
+        for seed in (8101, 8102)
+    ]
+
+    tdc_model = adversarial_tdc_model()
+    gamma = 0.83
+    tdc_lambdas = (0.90, 0.97)
+    tdc_systems = {lam: analytic_tdc_system(tdc_model, lam, gamma) for lam in tdc_lambdas}
+    tdc_cells = [
+        run_exact_tdc(tdc_model, tdc_systems[lam], lam, seed, steps=160_000)
+        for lam in tdc_lambdas
+        for seed in (7301, 7302)
+    ]
+    behavior_transition = policy_transition(tdc_model, tdc_model["behavior"])
+    tdc_assumptions = {
+        "F1_finite_irreducible_behavior_chain": float(
+            np.min(np.linalg.matrix_power(behavior_transition, int(tdc_model["states"])))
+        )
+        > 0,
+        "F1_behavior_policy_full_support": float(np.min(tdc_model["behavior"])) > 0,
+        "F2_feature_matrix_full_rank": int(np.linalg.matrix_rank(tdc_model["Phi"])) == int(tdc_model["features"]),
+        "A_invertible_for_both_lambdas": all(
+            float(tdc_systems[lam]["A_invertibility_margin"]) > 1e-8 for lam in tdc_lambdas
+        ),
+        "B2_timescale_separation": max(float(row["final_beta_over_alpha"]) for row in tdc_cells) < 0.25,
+        "exact_unprojected_definition_7_1": not any(bool(row["projection_or_clipping_used"]) for row in tdc_cells),
+    }
+    controls = {
+        "unstable_fast_ode": unstable_detector_control(),
+        "rank_deficient_tdc_features": {
+            "accepted": False,
+            "reason": "F.2 violated",
+            "detector_triggered": np.linalg.matrix_rank(np.column_stack([tdc_model["Phi"], tdc_model["Phi"][:, 0]]))
+            < int(tdc_model["features"]) + 1,
+        },
+        "projected_tdc_variant": {
+            "accepted": False,
+            "reason": "not the unprojected Definition 7.1 algorithm",
+            "detector_triggered": True,
+        },
+    }
+    return {
+        "route": 4,
+        "exact_claim_contracts": {
+            "1": "For every process satisfying B.1-B.7, sup_n ||z_n|| is finite on almost every sample path.",
+            "2": "For every process satisfying B.1-B.7, tracking and joint errors converge to zero on almost every sample path.",
+            "3": "For every process satisfying the Appendix B premises, one sample-path finite K bounds every n.",
+            "4": "Under Appendix F and inherited Appendix B premises, exact unprojected TDC(lambda) converges almost surely under off-policy Markov sampling.",
+        },
+        "source_anchors": {
+            "1": "Theorem 3.2 / #S3.Thmtheorem2",
+            "2": "Theorem 3.3 / #S3.Thmtheorem3",
+            "3": "Lemma 3.1 / #S3.Thmtheorem1",
+            "4": "Definition 7.1 and Theorem 7.2 / #S7.Thmtheorem1 and #S7.Thmtheorem2",
+        },
+        "sa_search": {
+            "selection_rule": "promote the largest tail norm slope, breaking ties by maximum norm growth",
+            "search_cells": search_cells,
+            "holdout_cells": holdout_cells,
+            "first_hit_threshold": "10 times the initial joint norm",
+        },
+        "tdc_search": {
+            "lambdas": list(tdc_lambdas),
+            "cells": tdc_cells,
+            "assumptions": tdc_assumptions,
+            "all_assumptions_satisfied": all(tdc_assumptions.values()),
+            "max_importance_ratio": max(float(row["max_importance_ratio"]) for row in tdc_cells),
+            "max_trace_norm": max(float(row["max_eligibility_trace_norm"]) for row in tdc_cells),
+        },
+        "negative_controls": controls,
+        "valid_counterexample_found": False,
+        "scientific_verdicts": {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"},
+        "conclusion": "No valid assumption-satisfying counterexample was established. Finite searches cannot prove the universal claims, so all four remain BLOCKED.",
+    }
+
+
 def main() -> None:
     started = time.perf_counter()
     machine = machine_info()
@@ -888,6 +1098,7 @@ def main() -> None:
         "claims_1_2_3_5": run_claims_1_2_3_5(),
         "claim_5_source": run_claim_5_source_verifier(),
         "proof_dependency_reconstruction": run_proof_dependency_reconstruction(),
+        "mandatory_falsification_search": run_mandatory_falsification_search(),
         "campaign_verdict": "BLOCKED",
     }
     results["runtime_seconds"] = time.perf_counter() - started
