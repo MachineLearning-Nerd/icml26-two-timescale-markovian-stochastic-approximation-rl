@@ -1262,10 +1262,15 @@ def post_publication_audit() -> dict[str, object]:
     ]
     if mismatched_uploads:
         raise AssertionError(f"published bytes differ from the frozen candidate: {mismatched_uploads}")
+    archival_paths = {
+        "README.md": "historical/judged/README.md",
+        "logbook.json": "historical/judged/logbook.json",
+        "pages/index.md": "historical/judged/pages/index.md",
+    }
     protected_mismatches = [
         relative
         for relative, expected in expected_protected.items()
-        if hashlib.sha256(download(relative)).hexdigest() != expected
+        if hashlib.sha256(download(archival_paths.get(relative, relative))).hexdigest() != expected
     ]
     if protected_mismatches:
         raise AssertionError(f"published judged evidence changed: {protected_mismatches}")
