@@ -125,6 +125,29 @@ def verify(results: dict) -> None:
     if source["scientific_verdict"] != "VERIFIED":
         raise AssertionError("Claim 5 source verdict is not VERIFIED")
 
+    proof = results["proof_dependency_reconstruction"]
+    if proof["paper_source"]["sha256"] != "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd":
+        raise AssertionError("proof route used the wrong paper source")
+    if proof["yu_2017_source"]["sha256"] != "fa48127d46d01abfc81bf2e737815f9afed5cdae63f5de37993d722c7c002acd":
+        raise AssertionError("proof route used the wrong Yu (2017) source")
+    proof_checks = proof["audit"]["checks"]
+    if not all(proof_checks.values()):
+        failed = sorted(name for name, passed in proof_checks.items() if not passed)
+        raise AssertionError(f"proof dependency checks failed: {failed}")
+    if proof["formal_proof_certificate_present"]:
+        raise AssertionError("source parsing was misrepresented as a formal proof certificate")
+    if proof["scientific_verdicts"] != {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"}:
+        raise AssertionError("universal theorem verdict inflated by a source-level route")
+    expected_proof_controls = {
+        "claim_3_terminal_removed": "Lemma 3.1 terminal bound missing",
+        "tdc_to_main_theorem_edge_removed": "Theorem 7.2 dependency missing",
+        "yu_scope_statement_removed": "primary-source scope evidence missing",
+    }
+    for name, reason in expected_proof_controls.items():
+        row = proof["negative_controls"][name]
+        if row != {"accepted": False, "reason": reason}:
+            raise AssertionError(f"proof-route negative control {name} did not fail")
+
 
 def main() -> None:
     if len(sys.argv) != 2:

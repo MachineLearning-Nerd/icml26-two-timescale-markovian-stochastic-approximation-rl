@@ -1,0 +1,14 @@
+{
+  "route": 3,
+  "claims": [1, 2, 3, 4],
+  "purpose": "Independently reconstruct the registered paper's proof-dependency graph and the primary-source scope comparison for TDC(lambda).",
+  "acceptance": [
+    "both source archives match preregistered SHA-256 digests",
+    "the four proof regions occur in order",
+    "each claim's terminal statement and inter-claim dependency are present",
+    "the exact eligibility-trace recursion has no projection operator",
+    "Yu (2017) identifies TDC as GTDb, treats two-timescale GTDb with constraints, and reserves its unconstrained result for single-timescale GTDa",
+    "three destructive source mutations are rejected"
+  ],
+  "verdict_rule": "A source dependency graph is not a machine-checkable proof certificate. Claims 1-4 remain BLOCKED unless a kernel-checked proof or valid counterexample is produced."
+}

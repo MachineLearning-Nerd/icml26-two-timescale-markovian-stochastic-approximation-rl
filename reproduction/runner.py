@@ -746,6 +746,118 @@ def run_claim_5_source_verifier() -> dict[str, object]:
     }
 
 
+def proof_dependency_checks(tex: str, yu_tex: str) -> dict[str, object]:
+    lemma_start = tex.find("\\section{Proof of Lemma~\\ref{thm: x stability}}")
+    stability_start = tex.find("\\section{Proof of Theorem \\ref{thm: z stability}}")
+    convergence_start = tex.find("\\section{Convergence} \\label{appendix: convergence proof full}")
+    tdc_start = tex.find("\\section{Convergence of TDC with Eligibility Traces}")
+    technical_start = tex.find("\\section{Technical Lemmas}", tdc_start)
+    lemma_proof = tex[lemma_start:stability_start]
+    stability_proof = tex[stability_start:convergence_start]
+    convergence_proof = tex[convergence_start:tdc_start]
+    tdc_proof = tex[tdc_start:technical_start]
+    tdc_definition_start = tdc_proof.find("\\label{eq gtd}")
+    tdc_definition_end = tdc_proof.find("\\end{align}", tdc_definition_start)
+    tdc_definition = tdc_proof[tdc_definition_start:tdc_definition_end]
+    checks = {
+        "four_proof_regions_found_in_order": -1 < lemma_start < stability_start < convergence_start < tdc_start < technical_start,
+        "claim_3_terminal_running_max_bound": "By setting $K$ equal to $C_1C_2C_3$" in lemma_proof and "\\norm{\\ymax_n} + 1" in lemma_proof,
+        "claim_1_uses_claim_3_lemma": "Lemma \\ref{thm: x stability}" in stability_proof,
+        "claim_1_terminal_contradiction": "The sequence $r_n$ is bounded, creating a contradiction" in stability_proof and "verifying Theorem \\ref{thm: z stability}" in stability_proof,
+        "claim_2_uses_stability": "The stability results from Theorem~\\ref{thm: z stability} hold" in convergence_proof,
+        "claim_2_fast_limit_present": "\\lim_{n \\rightarrow \\infty} \\norm{x_n - \\lambda(y_n)} = 0" in convergence_proof,
+        "claim_2_joint_limit_present": "\\lim_{n \\rightarrow \\infty} \\norm{z_n - (\\lambda(y^*), y^*)} = 0" in convergence_proof,
+        "claim_4_exact_trace_recursion_present": "e_t =& \\lambda \\gamma \\rho_{t-1} e_{t-1} + \\phi_t" in tdc_definition,
+        "claim_4_definition_has_no_projection_operator": "\\Pi" not in tdc_definition and "project" not in tdc_definition.lower(),
+        "claim_4_uses_theorem_3_3": "Theorem~\\ref{cor: convergence full} then implies" in tdc_proof,
+        "claim_4_uses_yu_invariance": "Lemma~\\ref{lemma: yu invariance}" in tdc_proof,
+        "claim_4_checks_slow_ode_definiteness": "-A^\\top C^{-1} A$ is negative definite" in tdc_proof,
+        "paper_has_one_explicitly_omitted_technical_proof": tex.count("omitted due to their length") == 1,
+        "yu_identifies_tdc_as_gtdb": "TDC, as well as GTD($\\lambda$)" in yu_tex and "refer to them as GTDa and GTDb" in yu_tex,
+        "yu_two_timescale_gtdb_is_constrained": "Consider now a constrained version of the two-time-scale GTDb algorithm" in yu_tex,
+        "yu_unconstrained_result_is_single_timescale_gtda": "Only for the single-time-scale GTDa algorithm, we will also analyze its unconstrained version" in yu_tex,
+    }
+    return {
+        "checks": checks,
+        "region_character_counts": {
+            "lemma_3_1": len(lemma_proof),
+            "theorem_3_2": len(stability_proof),
+            "theorem_3_3": len(convergence_proof),
+            "theorem_7_2": len(tdc_proof),
+        },
+    }
+
+
+def run_proof_dependency_reconstruction() -> dict[str, object]:
+    paper_url = "https://export.arxiv.org/e-print/2605.31172v1"
+    yu_url = "https://export.arxiv.org/e-print/1712.09652v2"
+    user_agent = "OpenResearch-Reproduction/1.0 (proof dependency verifier)"
+
+    def download_tex(url: str, expected_hash: str, member_name: str) -> tuple[str, int]:
+        request = urllib.request.Request(url, headers={"User-Agent": user_agent})
+        with urllib.request.urlopen(request, timeout=60) as response:
+            archive = response.read()
+        digest = hashlib.sha256(archive).hexdigest()
+        if digest != expected_hash:
+            raise AssertionError(f"source hash mismatch for {url}: {digest}")
+        with tarfile.open(fileobj=io.BytesIO(archive), mode="r:*") as source_tar:
+            member = source_tar.extractfile(member_name)
+            if member is None:
+                raise AssertionError(f"{member_name} missing from {url}")
+            return member.read().decode("utf-8"), len(archive)
+
+    paper_hash = "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd"
+    yu_hash = "fa48127d46d01abfc81bf2e737815f9afed5cdae63f5de37993d722c7c002acd"
+    tex, paper_bytes = download_tex(paper_url, paper_hash, "main.tex")
+    yu_tex, yu_bytes = download_tex(yu_url, yu_hash, "conv_gtd_v2.tex")
+    audit = proof_dependency_checks(tex, yu_tex)
+    without_lemma_terminal = proof_dependency_checks(
+        tex.replace("By setting $K$ equal to $C_1C_2C_3$", "REMOVED", 1), yu_tex
+    )
+    without_tdc_edge = proof_dependency_checks(
+        tex.replace("Theorem~\\ref{cor: convergence full} then implies", "REMOVED", 1), yu_tex
+    )
+    widened_yu_scope = proof_dependency_checks(
+        tex,
+        yu_tex.replace(
+            "Only for the single-time-scale GTDa algorithm, we will also analyze its unconstrained version",
+            "REMOVED",
+            1,
+        ),
+    )
+    controls = {
+        "claim_3_terminal_removed": {
+            "accepted": bool(without_lemma_terminal["checks"]["claim_3_terminal_running_max_bound"]),
+            "reason": "Lemma 3.1 terminal bound missing",
+        },
+        "tdc_to_main_theorem_edge_removed": {
+            "accepted": bool(without_tdc_edge["checks"]["claim_4_uses_theorem_3_3"]),
+            "reason": "Theorem 7.2 dependency missing",
+        },
+        "yu_scope_statement_removed": {
+            "accepted": bool(widened_yu_scope["checks"]["yu_unconstrained_result_is_single_timescale_gtda"]),
+            "reason": "primary-source scope evidence missing",
+        },
+    }
+    return {
+        "route": 3,
+        "paper_source": {"url": paper_url, "sha256": paper_hash, "bytes": paper_bytes},
+        "yu_2017_source": {"url": yu_url, "sha256": yu_hash, "bytes": yu_bytes},
+        "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
+        "user_agent": user_agent,
+        "audit": audit,
+        "negative_controls": controls,
+        "formal_proof_certificate_present": False,
+        "open_obligations": [
+            "The dependency graph and terminal equations are source-level checks, not a kernel-checked proof of the analytic arguments.",
+            "The paper explicitly omits one technical-lemma proof and cites Liu et al. (2025) for the analogous argument.",
+            "The Yu (2017) comparison is a two-source primary audit, not an exhaustive priority search over all prior literature.",
+        ],
+        "scientific_verdicts": {"1": "BLOCKED", "2": "BLOCKED", "3": "BLOCKED", "4": "BLOCKED"},
+        "confidence": {"1": "LOW", "2": "LOW", "3": "LOW", "4": "LOW"},
+    }
+
+
 def main() -> None:
     started = time.perf_counter()
     machine = machine_info()
@@ -760,6 +872,7 @@ def main() -> None:
         "claim_4": run_claim_4(),
         "claims_1_2_3_5": run_claims_1_2_3_5(),
         "claim_5_source": run_claim_5_source_verifier(),
+        "proof_dependency_reconstruction": run_proof_dependency_reconstruction(),
         "campaign_verdict": "BLOCKED",
     }
     results["runtime_seconds"] = time.perf_counter() - started
