@@ -10,7 +10,7 @@ Assessment: Claim 5 is **VERIFIED** on the complete registered source domain. Cl
 
 - [Illustrated technical report](reports/reproduction/report.md)
 - [Self-contained tutorial notebook](notebooks/two_timescale_reproduction.py)
-- [Existing Hugging Face logbook](https://huggingface.co/spaces/DineshAI/Iww9TICvKj)
+- [Published Hugging Face logbook](https://huggingface.co/spaces/DineshAI/Iww9TICvKj/tree/bec3336591285a901d33d2abba824f6e2bc31d8c) — exact audited revision `bec3336591285a901d33d2abba824f6e2bc31d8c`
 
 Compute: Hugging Face `cpu-upgrade` only (8 vCPU/32 GB advertised), Python 3.12 with `uv.lock`; no GPU devices. Every formal node used the same command.
 
@@ -25,6 +25,8 @@ Compute: Hugging Face `cpu-upgrade` only (8 vCPU/32 GB advertised), Python 3.12 
 | [Appendix B source verifier](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/hash-pinned-assumption-source-verifier) | Exhaustive hash-pinned source-domain check | `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py` | Claim 5 VERIFIED | HF `cpu-upgrade` |
 | [Proof dependency reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/proof-dependency-reconstruction) | Paper/Yu source graph and proof-gap audit | `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py` | Third route complete; Claims 1–4 BLOCKED | HF `cpu-upgrade` |
 | [Mandatory falsification search](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/mandatory-falsification-search) | Nonnormal SA holdouts and high-ratio TDC | `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py` | No valid counterexample; Claims 1–4 BLOCKED | HF `cpu-upgrade` |
+| [Evaluator-visible release candidate](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/evaluator-visible-release-candidate) | Cumulative science, canonical traversal, protected-file and upload-manifest gates | `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py` | PASS; winning release commit `e1ddb9a` | HF `cpu-upgrade` |
+| [Exact published-revision audit](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/post-publication-exact-revision-audit) | Download and verify immutable HF revision `bec3336` | `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py` | PASS; 32/32 texts and 17/17 judged files matched | HF `cpu-upgrade` |
 
 ## Local notebook
 
