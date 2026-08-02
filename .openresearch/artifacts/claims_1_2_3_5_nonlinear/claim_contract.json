@@ -1,0 +1,27 @@
+{
+  "source": "arXiv:2605.31172",
+  "claims": {
+    "1": {
+      "anchor": "Theorem 3.2",
+      "statement": "Under Appendix B assumptions, sup_n ||z_n|| is finite almost surely without projection.",
+      "quantifier": "all iterates on almost every Markov sample path"
+    },
+    "2": {
+      "anchor": "Theorem 3.3",
+      "statement": "Under Appendix B assumptions, ||x_n-lambda(y_n)|| tends to zero and z_n tends to (lambda(y*),y*) almost surely.",
+      "quantifier": "limit n to infinity on almost every Markov sample path"
+    },
+    "3": {
+      "anchor": "Lemma 3.1",
+      "statement": "There is a sample-path finite K such that ||x_n|| <= K(1+||y_n^max||) for every n almost surely.",
+      "quantifier": "one K per sample path, uniform over every n"
+    },
+    "5": {
+      "anchor": "Appendix B",
+      "statement": "The theorem premises are the Appendix B conditions, including unique stationary Markov noise, Robbins-Monro rates with beta/alpha tending to zero, scaling limits, global Lipschitz control, stable limiting ODEs, and weighted Markov-noise averaging.",
+      "numbering_note": "B.3 is rendered as a Remark, not an Assumption."
+    }
+  },
+  "route": "A nonlinear globally Lipschitz family is checked at dimensions 8, 32, and 64, three Markov mixing regimes, and two initial scales. Analytic certificates establish the equilibrium map, ODE stability, scaling limits, and a conservative running-maximum K for this family.",
+  "verdict_rule": "This route can corroborate and certify the constructed family but cannot verify the paper's universal theorem. Absent a general proof certificate or a valid counterexample, each theorem-level verdict is BLOCKED."
+}

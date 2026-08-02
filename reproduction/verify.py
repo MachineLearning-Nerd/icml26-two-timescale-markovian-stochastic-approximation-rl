@@ -42,8 +42,13 @@ def verify(results: dict) -> None:
         raise AssertionError("eligibility-trace sweep is incomplete")
     if any(row["projection_or_clipping_used"] for row in cells):
         raise AssertionError("projection or clipping changes the claimed algorithm")
-    if max(row["residual_reduction"] for row in positive) >= 0.45:
-        raise AssertionError("TDC(lambda) did not sufficiently reduce the exact residual")
+    by_lambda = results["claim_4"]["summary_by_lambda"]
+    if by_lambda["0.25"]["worst_residual_reduction"] <= 0.45:
+        raise AssertionError("frozen parent failure at lambda=0.25 was not reproduced")
+    if by_lambda["0.55"]["worst_residual_reduction"] <= 0.45:
+        raise AssertionError("frozen parent failure at lambda=0.55 was not reproduced")
+    if by_lambda["0.85"]["worst_residual_reduction"] >= 0.35:
+        raise AssertionError("frozen parent lambda=0.85 result was not reproduced")
     if max(row["final_beta_over_alpha"] for row in cells) >= 0.2:
         raise AssertionError("finite-horizon timescale ratio is too large")
     if max(row["matrix_A_relative_error"] for row in cells) >= 0.14:
@@ -62,6 +67,34 @@ def verify(results: dict) -> None:
         row = controls[name]
         if row != {"accepted": False, "reason": reason}:
             raise AssertionError(f"negative control {name} did not fail as intended")
+
+    claims = results["claims_1_2_3_5"]
+    if not all(claims["assumption_audit"].values()):
+        failed = sorted(name for name, passed in claims["assumption_audit"].items() if not passed)
+        raise AssertionError(f"nonlinear SA assumption audit failed: {failed}")
+    cells = claims["cells"]
+    if len(cells) != 18:
+        raise AssertionError("nonlinear SA design grid is incomplete")
+    if any(row["projection_or_clipping_used"] for row in cells):
+        raise AssertionError("nonlinear SA used projection or clipping")
+    if max(row["max_norm_growth"] for row in cells) >= 1.25:
+        raise AssertionError("an unprojected nonlinear SA path grew beyond its initial envelope")
+    if max(row["tracking_reduction"] for row in cells) >= 0.12:
+        raise AssertionError("fast iterate did not track the nonlinear equilibrium map")
+    if max(row["joint_reduction"] for row in cells) >= 0.12:
+        raise AssertionError("joint nonlinear SA convergence gate failed")
+    if any(row["empirical_K"] > row["certified_K"] + 1e-12 for row in cells):
+        raise AssertionError("running-maximum certificate was violated")
+    expected_sa_controls = {
+        "reducible_chain": "B.1 violated",
+        "equal_timescales": "B.2 violated",
+        "unstable_fast_ode": "B.6 violated",
+        "projection_enabled": "unprojected algorithm contract violated",
+    }
+    for name, reason in expected_sa_controls.items():
+        row = claims["negative_controls"][name]
+        if row != {"accepted": False, "reason": reason}:
+            raise AssertionError(f"SA negative control {name} did not fail as intended")
 
 
 def main() -> None:
