@@ -1,0 +1,25 @@
+{
+  "claim_id": 4,
+  "paper_id": "arXiv:2605.31172",
+  "source_anchor": "Theorem 7.2, Definition 7.1, Appendix F",
+  "statement": "For finite state and action spaces, an irreducible behavior-policy state chain with full action support, a full-column-rank feature matrix, invertible A, and Appendix B learning-rate/noise conditions, the unprojected off-policy Markovian TDC(lambda) iterates defined in Definition 7.1 converge almost surely.",
+  "quantifiers": {
+    "probability": "almost surely over the Markov sample path",
+    "lambda": "eligibility-trace parameter in the algorithm; this reproduction tests 0.25, 0.55, and 0.85 and retains 0 only as a trace-off control",
+    "time": "limit as t tends to infinity"
+  },
+  "required_algorithm": [
+    "e_t = lambda gamma rho_(t-1) e_(t-1) + phi_t",
+    "nu_(t+1) = nu_t + alpha_t (rho_t delta_t e_t - phi_t phi_t^T nu_t)",
+    "theta_(t+1) = theta_t + beta_t (rho_t delta_t e_t - rho_t (1-lambda) gamma phi_(t+1) e_t^T nu_t)"
+  ],
+  "finite_route_acceptance": [
+    "all paper structural assumptions are audited",
+    "three nonzero lambda values and four deterministic seeds each execute without projection or clipping",
+    "the exact analytic fixed-point residual falls below 45 percent of its initial value in every nonzero-lambda cell",
+    "sampled A and b agree with independently derived analytic values within 14 percent relative error",
+    "all four negative controls are rejected for their intended reason",
+    "the fail-closed verifier rejects tampered evidence"
+  ],
+  "theorem_verdict_rule": "Finite paths are scoped corroboration only. VERIFIED requires an independently reconstructed symbolic derivation or proof certificate; a valid assumption-satisfying counterexample would yield FALSIFIED; otherwise the theorem-level verdict remains BLOCKED."
+}
