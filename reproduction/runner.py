@@ -946,8 +946,10 @@ def run_adversarial_sa_case(shear: float, stickiness: float, seed: int, steps: i
         "B2_robbins_monro_and_timescale_separation": 0.5 < 0.58 < 0.84 <= 1.0,
         "B4_exact_scaling_limit": True,
         "B5_global_lipschitz": True,
-        "B6_fast_and_reduced_odes_globally_stable": float(np.min(np.real(np.linalg.eigvals(fast_matrix)))) > 0
-        and float(np.min(np.real(np.linalg.eigvals(slow_matrix)))) > 0,
+        "B6_fast_and_reduced_odes_globally_stable": bool(
+            float(np.min(np.real(np.linalg.eigvals(fast_matrix)))) > 0
+            and float(np.min(np.real(np.linalg.eigvals(slow_matrix)))) > 0
+        ),
         "B7_weighted_lln_from_finite_irreducible_bounded_chain": True,
     }
     return {
@@ -1022,25 +1024,32 @@ def run_mandatory_falsification_search() -> dict[str, object]:
     ]
     behavior_transition = policy_transition(tdc_model, tdc_model["behavior"])
     tdc_assumptions = {
-        "F1_finite_irreducible_behavior_chain": float(
-            np.min(np.linalg.matrix_power(behavior_transition, int(tdc_model["states"])))
-        )
-        > 0,
-        "F1_behavior_policy_full_support": float(np.min(tdc_model["behavior"])) > 0,
-        "F2_feature_matrix_full_rank": int(np.linalg.matrix_rank(tdc_model["Phi"])) == int(tdc_model["features"]),
-        "A_invertible_for_both_lambdas": all(
-            float(tdc_systems[lam]["A_invertibility_margin"]) > 1e-8 for lam in tdc_lambdas
+        "F1_finite_irreducible_behavior_chain": bool(
+            float(np.min(np.linalg.matrix_power(behavior_transition, int(tdc_model["states"])))) > 0
         ),
-        "B2_timescale_separation": max(float(row["final_beta_over_alpha"]) for row in tdc_cells) < 0.25,
-        "exact_unprojected_definition_7_1": not any(bool(row["projection_or_clipping_used"]) for row in tdc_cells),
+        "F1_behavior_policy_full_support": bool(float(np.min(tdc_model["behavior"])) > 0),
+        "F2_feature_matrix_full_rank": bool(
+            int(np.linalg.matrix_rank(tdc_model["Phi"])) == int(tdc_model["features"])
+        ),
+        "A_invertible_for_both_lambdas": bool(
+            all(float(tdc_systems[lam]["A_invertibility_margin"]) > 1e-8 for lam in tdc_lambdas)
+        ),
+        "B2_timescale_separation": bool(
+            max(float(row["final_beta_over_alpha"]) for row in tdc_cells) < 0.25
+        ),
+        "exact_unprojected_definition_7_1": bool(
+            not any(bool(row["projection_or_clipping_used"]) for row in tdc_cells)
+        ),
     }
     controls = {
         "unstable_fast_ode": unstable_detector_control(),
         "rank_deficient_tdc_features": {
             "accepted": False,
             "reason": "F.2 violated",
-            "detector_triggered": np.linalg.matrix_rank(np.column_stack([tdc_model["Phi"], tdc_model["Phi"][:, 0]]))
-            < int(tdc_model["features"]) + 1,
+            "detector_triggered": bool(
+                np.linalg.matrix_rank(np.column_stack([tdc_model["Phi"], tdc_model["Phi"][:, 0]]))
+                < int(tdc_model["features"]) + 1
+            ),
         },
         "projected_tdc_variant": {
             "accepted": False,
