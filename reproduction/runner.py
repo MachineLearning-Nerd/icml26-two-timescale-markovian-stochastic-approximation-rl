@@ -506,6 +506,9 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
     result_path = output / "results.json"
     result_path.write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    print("ORX_EVIDENCE_BEGIN")
+    print(json.dumps(results, indent=2, sort_keys=True))
+    print("ORX_EVIDENCE_END")
     verify(results)
     tampered = deepcopy(results)
     tampered["claim_4"]["assumption_audit"]["exact_A_invertible"] = False
@@ -518,9 +521,6 @@ def main() -> None:
         raise AssertionError("fail-closed verifier accepted tampered evidence")
     results["independent_checker"] = {"status": "PASS", "tampered_evidence_rejected": True}
     result_path.write_text(json.dumps(results, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print("ORX_EVIDENCE_BEGIN")
-    print(json.dumps(results, indent=2, sort_keys=True))
-    print("ORX_EVIDENCE_END")
 
 
 if __name__ == "__main__":
