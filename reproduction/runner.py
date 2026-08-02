@@ -747,6 +747,14 @@ def run_claim_5_source_verifier() -> dict[str, object]:
 
 
 def proof_dependency_checks(tex: str, yu_tex: str) -> dict[str, object]:
+    overview_start = tex.find("% Fast timescale outer box")
+    overview_end = tex.find("% Final theorem", overview_start)
+    overview = tex[overview_start:overview_end]
+    overview_dependencies = [
+        overview.find("\\hyperref[thm: x stability]{Lemma 3.1}"),
+        overview.find("\\hyperref[sec: bridging]{Connecting the Timescales}"),
+        overview.find("\\hyperref[appendix: proof z stab]{\\textbf{Slow Timescale Stability Analysis}}"),
+    ]
     lemma_start = tex.find("\\section{Proof of Lemma~\\ref{thm: x stability}}")
     stability_start = tex.find("\\section{Proof of Theorem \\ref{thm: z stability}}")
     convergence_start = tex.find("\\section{Convergence} \\label{appendix: convergence proof full}")
@@ -762,7 +770,10 @@ def proof_dependency_checks(tex: str, yu_tex: str) -> dict[str, object]:
     checks = {
         "four_proof_regions_found_in_order": -1 < lemma_start < stability_start < convergence_start < tdc_start < technical_start,
         "claim_3_terminal_running_max_bound": "By setting $K$ equal to $C_1C_2C_3$" in lemma_proof and "\\norm{\\ymax_n} + 1" in lemma_proof,
-        "claim_1_uses_claim_3_lemma": "Lemma \\ref{thm: x stability}" in stability_proof,
+        "claim_1_dependency_graph_places_claim_3_before_slow_stability": (
+            all(position >= 0 for position in overview_dependencies)
+            and overview_dependencies == sorted(overview_dependencies)
+        ),
         "claim_1_terminal_contradiction": "The sequence $r_n$ is bounded, creating a contradiction" in stability_proof and "verifying Theorem \\ref{thm: z stability}" in stability_proof,
         "claim_2_uses_stability": "The stability results from Theorem~\\ref{thm: z stability} hold" in convergence_proof,
         "claim_2_fast_limit_present": "\\lim_{n \\rightarrow \\infty} \\norm{x_n - \\lambda(y_n)} = 0" in convergence_proof,
@@ -811,9 +822,13 @@ def run_proof_dependency_reconstruction() -> dict[str, object]:
     tex, paper_bytes = download_tex(paper_url, paper_hash, "main.tex")
     yu_tex, yu_bytes = download_tex(yu_url, yu_hash, "conv_gtd_v2.tex")
     audit = proof_dependency_checks(tex, yu_tex)
-    without_lemma_terminal = proof_dependency_checks(
-        tex.replace("By setting $K$ equal to $C_1C_2C_3$", "REMOVED", 1), yu_tex
+    lemma_proof_start = tex.find("\\section{Proof of Lemma~\\ref{thm: x stability}}")
+    lemma_terminal_start = tex.find("By setting $K$ equal to $C_1C_2C_3$", lemma_proof_start)
+    without_lemma_terminal_tex = (
+        tex[:lemma_terminal_start]
+        + tex[lemma_terminal_start:].replace("By setting $K$ equal to $C_1C_2C_3$", "REMOVED", 1)
     )
+    without_lemma_terminal = proof_dependency_checks(without_lemma_terminal_tex, yu_tex)
     without_tdc_edge = proof_dependency_checks(
         tex.replace("Theorem~\\ref{cor: convergence full} then implies", "REMOVED", 1), yu_tex
     )
