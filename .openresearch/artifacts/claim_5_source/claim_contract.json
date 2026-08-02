@@ -1,0 +1,19 @@
+{
+  "claim": 5,
+  "source": "arXiv:2605.31172v1",
+  "anchor": "Appendix B and the proofs of Theorems 3.3 and 7.2",
+  "statement": "The convergence analysis relies on the Appendix B premises, including a unique invariant probability measure for the Markov noise and beta(n)/alpha(n) tending to zero.",
+  "domain": "the paper's registered TeX source",
+  "quantifier": "all six Appendix B assumption environments and every cited dependency in the selected theorem proofs",
+  "acceptance": [
+    "the downloaded archive exactly matches the preregistered SHA-256",
+    "the six labeled assumption environments occur once and in source order",
+    "B.1 contains the unique-invariant-measure premise",
+    "B.2 contains the beta/alpha limit",
+    "B.3 is a remark rather than an assumption",
+    "Theorem 3.3 declares the full Appendix B range",
+    "the TDC proof references all six Appendix B labels",
+    "two destructive source mutations are rejected"
+  ],
+  "verdict_rule": "VERIFIED only if every structural check passes and both negative controls fail as intended."
+}

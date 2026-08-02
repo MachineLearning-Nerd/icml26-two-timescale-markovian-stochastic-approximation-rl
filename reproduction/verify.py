@@ -96,6 +96,35 @@ def verify(results: dict) -> None:
         if row != {"accepted": False, "reason": reason}:
             raise AssertionError(f"SA negative control {name} did not fail as intended")
 
+    source = results["claim_5_source"]
+    if source["sha256"] != "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd":
+        raise AssertionError("Claim 5 source is not the registered arXiv revision")
+    source_audit = source["audit"]
+    required_source_checks = {
+        "all_six_assumption_environments_present",
+        "assumptions_in_source_order",
+        "B3_is_remark_not_assumption",
+        "B1_contains_unique_stationary_premise",
+        "B2_contains_timescale_limit",
+        "theorem_3_3_uses_full_assumption_range",
+        "tdc_proof_references_all_six",
+    }
+    if not all(source_audit[name] for name in required_source_checks):
+        failed = sorted(name for name in required_source_checks if not source_audit[name])
+        raise AssertionError(f"Claim 5 source checks failed: {failed}")
+    if source_audit["assumption_environment_count_in_appendix_B"] != 6:
+        raise AssertionError("Appendix B assumption count changed")
+    expected_source_controls = {
+        "timescale_formula_removed": "B.2 timescale formula missing",
+        "B3_mislabeled_as_assumption": "B.3 source type changed",
+    }
+    for name, reason in expected_source_controls.items():
+        row = source["negative_controls"][name]
+        if row != {"accepted": False, "reason": reason}:
+            raise AssertionError(f"source negative control {name} did not fail")
+    if source["scientific_verdict"] != "VERIFIED":
+        raise AssertionError("Claim 5 source verdict is not VERIFIED")
+
 
 def main() -> None:
     if len(sys.argv) != 2:
