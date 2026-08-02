@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">Worst-regime nonnormal SA holdouts</title>
+  <desc id="desc">Two fresh-seed holdouts show large early transients followed by declining joint norms through 400000 steps.</desc>
+  <rect width="1100" height="520" class="canvas"/>
+  <style>
+    .canvas{fill:#fff}text{font-family:system-ui,sans-serif;fill:#172033}.title{font-size:27px;font-weight:600}.sub{font-size:16px;fill:#4b5563}.axis{stroke:#64748b;stroke-width:1}.grid{stroke:#cbd5e1;stroke-width:1}.s1{stroke:#2563eb;stroke-width:4;fill:none}.s2{stroke:#dc2626;stroke-width:4;fill:none}.dot1{fill:#2563eb}.dot2{fill:#dc2626}.label{font-size:15px}.legend{font-size:16px;font-weight:600}
+    @media(prefers-color-scheme:dark){.canvas{fill:#0f172a}text{fill:#f3f4f6}.sub{fill:#cbd5e1}.grid{stroke:#475569}.axis{stroke:#94a3b8}}
+  </style>
+  <text x="55" y="42" class="title">Worst-regime holdouts: large transients, then decay</text>
+  <text x="55" y="70" class="sub">shear=5 · Markov stickiness=.96 · fresh seeds · no projection · log-scaled axes</text>
+  <line x1="90" y1="430" x2="1010" y2="430" class="axis"/><line x1="90" y1="95" x2="90" y2="430" class="axis"/>
+  <g class="grid"><line x1="90" y1="120" x2="1010" y2="120"/><line x1="90" y1="220" x2="1010" y2="220"/><line x1="90" y1="320" x2="1010" y2="320"/></g>
+  <text x="28" y="125" class="label">5,000</text><text x="28" y="225" class="label">2,000</text><text x="28" y="325" class="label">800</text><text x="28" y="425" class="label">300</text>
+  <text x="88" y="458" class="label">1k</text><text x="290" y="458" class="label">5k</text><text x="488" y="458" class="label">20k</text><text x="687" y="458" class="label">60k</text><text x="920" y="458" class="label">400k steps</text>
+  <polyline points="100,167 300,132 500,246 700,306 930,385" class="s1"/>
+  <polyline points="100,284 300,118 500,200 700,270 930,310" class="s2"/>
+  <g class="dot1"><circle cx="100" cy="167" r="6"/><circle cx="300" cy="132" r="6"/><circle cx="500" cy="246" r="6"/><circle cx="700" cy="306" r="6"/><circle cx="930" cy="385" r="6"/></g>
+  <g class="dot2"><circle cx="100" cy="284" r="6"/><circle cx="300" cy="118" r="6"/><circle cx="500" cy="200" r="6"/><circle cx="700" cy="270" r="6"/><circle cx="930" cy="310" r="6"/></g>
+  <line x1="710" y1="96" x2="750" y2="96" class="s1"/><text x="760" y="102" class="legend">seed 8101 · slope −0.337</text>
+  <line x1="710" y1="126" x2="750" y2="126" class="s2"/><text x="760" y="132" class="legend">seed 8102 · slope −0.343</text>
+  <text x="550" y="485" text-anchor="middle" class="sub">Finite decay corroborates; it does not prove almost-sure boundedness.</text>
+</svg>

@@ -1,0 +1,46 @@
+{
+  "audit": {
+    "B1_contains_unique_stationary_premise": true,
+    "B2_contains_timescale_limit": true,
+    "B3_is_remark_not_assumption": true,
+    "all_six_assumption_environments_present": true,
+    "assumption_environment_count_in_appendix_B": 6,
+    "assumption_labels": [
+      "assumption: stationary distribution",
+      "assumption: learning ratios",
+      "assumption: H c H infty",
+      "assumption: H Lipschitz",
+      "assumption: lim h,g uniformly convergent",
+      "assumption: lln"
+    ],
+    "assumptions_in_source_order": true,
+    "label_positions": [
+      63928,
+      64464,
+      66317,
+      67640,
+      69173,
+      70824
+    ],
+    "tdc_proof_references_all_six": true,
+    "theorem_3_3_uses_full_assumption_range": true
+  },
+  "bytes": 78416,
+  "claim": "The convergence analysis relies on the Appendix B premises, including unique stationary Markov noise and beta(n)/alpha(n) tending to zero.",
+  "limitation": "This verifies the paper's stated dependency structure, not that every premise is true for every external application.",
+  "negative_controls": {
+    "B3_mislabeled_as_assumption": {
+      "accepted": false,
+      "reason": "B.3 source type changed"
+    },
+    "timescale_formula_removed": {
+      "accepted": false,
+      "reason": "B.2 timescale formula missing"
+    }
+  },
+  "retrieved_at_utc": "2026-08-02T10:27:21.710733+00:00",
+  "scientific_verdict": "VERIFIED",
+  "sha256": "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd",
+  "source_url": "https://export.arxiv.org/e-print/2605.31172v1",
+  "user_agent": "OpenResearch-Reproduction/1.0 (source verifier)"
+}

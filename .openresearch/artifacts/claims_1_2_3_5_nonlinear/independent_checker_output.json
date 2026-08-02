@@ -1,0 +1,9 @@
+{
+  "run_id": "df3c8eb3-22f3-478d-82ad-bf41b4335454",
+  "git_sha": "7f24f1dce0b64a254d51e483a4b3f581f4610a6a",
+  "status": "PASS",
+  "tampered_evidence_rejected": true,
+  "verifier": "current/verify.py",
+  "fixed_command": "uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py",
+  "note": "Every route-specific negative control is stored in its linked raw JSON. The verifier exits nonzero on any failed predicate."
+}

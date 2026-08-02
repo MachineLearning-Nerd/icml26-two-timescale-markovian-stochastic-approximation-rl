@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "title": "Repro - Two-Timescale Markovian SA",
+  "emoji": "🎯",
+  "space_id": "DineshAI/Iww9TICvKj",
+  "paper": "https://arxiv.org/abs/2605.31172",
+  "tags": [
+    "icml2026-repro",
+    "paper-Iww9TICvKj"
+  ],
+  "updated_at": "2026-08-02T00:00:00+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Repro - Two-Timescale Markovian SA",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "current-verification",
+        "title": "Current verification — start here",
+        "file": "pages/current-verification/page.md",
+        "children": [
+          {
+            "slug": "current-claim-1",
+            "title": "Claim 1 — BLOCKED",
+            "file": "pages/current-claim-1/page.md",
+            "children": []
+          },
+          {
+            "slug": "current-claim-2",
+            "title": "Claim 2 — BLOCKED",
+            "file": "pages/current-claim-2/page.md",
+            "children": []
+          },
+          {
+            "slug": "current-claim-3",
+            "title": "Claim 3 — BLOCKED",
+            "file": "pages/current-claim-3/page.md",
+            "children": []
+          },
+          {
+            "slug": "current-claim-4",
+            "title": "Claim 4 — BLOCKED",
+            "file": "pages/current-claim-4/page.md",
+            "children": []
+          },
+          {
+            "slug": "current-claim-5",
+            "title": "Claim 5 — VERIFIED",
+            "file": "pages/current-claim-5/page.md",
+            "children": []
+          }
+        ]
+      },
+      {
+        "slug": "overview",
+        "title": "Historical rejected baseline — overview",
+        "file": "pages/overview/page.md",
+        "children": []
+      },
+      {
+        "slug": "claims",
+        "title": "Historical rejected baseline — claims",
+        "file": "pages/claims/page.md",
+        "children": []
+      },
+      {
+        "slug": "evidence",
+        "title": "Historical rejected baseline — evidence",
+        "file": "pages/evidence/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Historical rejected baseline — conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      },
+      {
+        "slug": "verification-run",
+        "title": "Historical rejected baseline — verification run",
+        "file": "pages/verification-run/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 12000,
+  "revision": "current-release-candidate"
+}

@@ -1,6 +1,6 @@
 # Claim 4 — TDC with eligibility traces
 
-**Current theorem verdict: BLOCKED while the exact child run is pending.** The prior lambda-zero result is preserved below as a **Historical rejected baseline**; it is not the current verifier and earns no eligibility-trace credit.
+**Current theorem verdict: BLOCKED after four routes.** This route completed successfully as faithful finite evidence. The prior lambda-zero result is preserved below as a **Historical rejected baseline**; it is not the current verifier and earns no eligibility-trace credit.
 
 The exact source claim is almost-sure convergence of the unprojected off-policy, Markov-sampled TDC(lambda) recurrences in Definition 7.1 under Appendix F and the invoked Appendix B assumptions. The historical priority phrase “first proof” is audited separately from convergence.
 
@@ -13,7 +13,7 @@ The exact source claim is almost-sure convergence of the unprojected off-policy,
 - Environment: Python 3.12 with repository `uv.lock`
 - Compute: Hugging Face `cpu-upgrade`; estimated one required core; no GPU permitted
 
-This verifier executes lambda 0.25, 0.55, and 0.85, four seeds each, on a 20-state/two-action/ten-feature action-dependent MDP without projection. It compares sampled trace moments and residuals against an independently derived analytic finite-MDP system. Results will not be promoted until raw output, checker output, negative-control output, actual CPU allocation, runtime, Git SHA, and limitations are copied inline here.
+This verifier executed lambda 0.25, 0.55, and 0.85, four seeds each, on a 20-state/two-action/ten-feature action-dependent MDP without projection. It compared sampled trace moments and residuals against an independently derived analytic finite-MDP system. Mean residual ratios were .4702, .4599, and .3149; maximum trace norms were 1.146, 2.156, and 6.596. See [the canonical Claim 4 page](#/current-claim-4).
 
 ## Historical rejected baseline
 

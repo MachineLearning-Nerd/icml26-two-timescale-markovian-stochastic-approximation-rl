@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="480" viewBox="0 0 1100 480" role="img" aria-labelledby="title desc">
+  <title id="title">Four-route verification ledger</title>
+  <desc id="desc">The campaign progresses from historical toy checks through faithful finite experiments, source proof reconstruction, and mandatory falsification search.</desc>
+  <rect width="1100" height="480" class="canvas"/>
+  <style>
+    .canvas{fill:#fff}text{font-family:system-ui,sans-serif;fill:#172033}.title{font-size:27px;font-weight:600}.sub{font-size:16px;fill:#4b5563}.box{fill:#eef2ff;stroke:#6366f1;stroke-width:2}.num{font-size:22px;font-weight:600}.head{font-size:17px;font-weight:600}.body{font-size:14px}.arrow{stroke:#64748b;stroke-width:3;fill:none;marker-end:url(#a)}
+    @media(prefers-color-scheme:dark){.canvas{fill:#0f172a}text{fill:#f3f4f6}.sub{fill:#cbd5e1}.box{fill:#1e293b;stroke:#818cf8}.arrow{stroke:#94a3b8}}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="45" y="42" class="title">Why four routes still end in BLOCKED</text>
+  <text x="45" y="70" class="sub">Each route answers a different question; none supplies a general proof certificate or valid counterexample.</text>
+  <rect x="45" y="120" width="220" height="220" rx="12" class="box"/><text x="65" y="155" class="num">1</text><text x="105" y="155" class="head">Historical baseline</text><text x="65" y="195" class="body">d=3 linear SA</text><text x="65" y="220" class="body">λ=0 TDC proxy</text><text x="65" y="270" class="body">Real but toy evidence</text><text x="65" y="300" class="head">Rejected as full proof</text>
+  <path d="M265 230 H305" class="arrow"/>
+  <rect x="305" y="120" width="220" height="220" rx="12" class="box"/><text x="325" y="155" class="num">2</text><text x="365" y="155" class="head">Faithful finite runs</text><text x="325" y="195" class="body">d=8/32/64 nonlinear SA</text><text x="325" y="220" class="body">positive-λ exact TDC</text><text x="325" y="270" class="body">Analytic family checks</text><text x="325" y="300" class="head">Aligned, still finite</text>
+  <path d="M525 230 H565" class="arrow"/>
+  <rect x="565" y="120" width="220" height="220" rx="12" class="box"/><text x="585" y="155" class="num">3</text><text x="625" y="155" class="head">Proof reconstruction</text><text x="585" y="195" class="body">Hash-pinned TeX DAG</text><text x="585" y="220" class="body">Yu (2017) primary audit</text><text x="585" y="270" class="body">One proof is omitted</text><text x="585" y="300" class="head">Not kernel-checked</text>
+  <path d="M785 230 H825" class="arrow"/>
+  <rect x="825" y="120" width="230" height="220" rx="12" class="box"/><text x="845" y="155" class="num">4</text><text x="885" y="155" class="head">Falsification search</text><text x="845" y="195" class="body">Nonnormal SA + holdouts</text><text x="845" y="220" class="body">High-ratio TDC traces</text><text x="845" y="270" class="body">No valid counterexample</text><text x="845" y="300" class="head">Claims 1–4 BLOCKED</text>
+  <text x="45" y="405" class="sub">Claim 5 differs: its statement is about the paper's own dependency structure, so the complete registered TeX domain is exhaustively checkable.</text>
+</svg>

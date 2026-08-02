@@ -1,0 +1,28 @@
+{
+  "run_id": "df3c8eb3-22f3-478d-82ad-bf41b4335454",
+  "git_sha": "7f24f1dce0b64a254d51e483a4b3f581f4610a6a",
+  "fixed_command": "uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py",
+  "image": "ghcr.io/astral-sh/uv:python3.12-bookworm-slim",
+  "backend": "hf",
+  "flavor": "cpu-upgrade",
+  "selected_allocation": {
+    "vcpus": 8,
+    "ram_gb": 32
+  },
+  "observed_machine": {
+    "actual_cpu_affinity": 64,
+    "actual_logical_cpus": 64,
+    "backend": "hf",
+    "estimated_required_cores": 1,
+    "gpu_device_files_detected": 0,
+    "platform": "Linux-6.12.94-123.192.amzn2023.x86_64-x86_64-with-glibc2.36",
+    "python": "3.12.12",
+    "selected_flavor": "cpu-upgrade"
+  },
+  "scientific_runtime_seconds": 652.1998091300011,
+  "estimated_cost_usd_at_0_03_per_hour": 0.005434998409416676,
+  "checker": {
+    "status": "PASS",
+    "tampered_evidence_rejected": true
+  }
+}

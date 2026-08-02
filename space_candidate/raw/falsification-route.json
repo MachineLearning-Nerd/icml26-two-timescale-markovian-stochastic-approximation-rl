@@ -1,0 +1,1010 @@
+{
+  "conclusion": "No valid assumption-satisfying counterexample was established. Finite searches cannot prove the universal claims, so all four remain BLOCKED.",
+  "exact_claim_contracts": {
+    "1": "For every process satisfying B.1-B.7, sup_n ||z_n|| is finite on almost every sample path.",
+    "2": "For every process satisfying B.1-B.7, tracking and joint errors converge to zero on almost every sample path.",
+    "3": "For every process satisfying the Appendix B premises, one sample-path finite K bounds every n.",
+    "4": "Under Appendix F and inherited Appendix B premises, exact unprojected TDC(lambda) converges almost surely under off-policy Markov sampling."
+  },
+  "negative_controls": {
+    "projected_tdc_variant": {
+      "accepted": false,
+      "detector_triggered": true,
+      "reason": "not the unprojected Definition 7.1 algorithm"
+    },
+    "rank_deficient_tdc_features": {
+      "accepted": false,
+      "detector_triggered": true,
+      "reason": "F.2 violated"
+    },
+    "unstable_fast_ode": {
+      "accepted": false,
+      "detector_triggered": true,
+      "growth": 4684032.431203317,
+      "reason": "B.6 violated by unstable fast ODE"
+    }
+  },
+  "route": 4,
+  "sa_search": {
+    "first_hit_threshold": "10 times the initial joint norm",
+    "holdout_cells": [
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 28.83907047312967,
+            "step": 1000,
+            "tracking_error": 3028.0531432125354,
+            "z_norm": 3074.8174801866107
+          },
+          {
+            "running_max_ratio": 28.83907047312967,
+            "step": 5000,
+            "tracking_error": 4018.409485306662,
+            "z_norm": 4242.7590599247005
+          },
+          {
+            "running_max_ratio": 28.83907047312967,
+            "step": 20000,
+            "tracking_error": 1198.347416279016,
+            "z_norm": 1614.3992424172075
+          },
+          {
+            "running_max_ratio": 28.83907047312967,
+            "step": 60000,
+            "tracking_error": 405.1152366998427,
+            "z_norm": 918.1196348771083
+          },
+          {
+            "running_max_ratio": 28.83907047312967,
+            "step": 400000,
+            "tracking_error": 83.62687053194902,
+            "z_norm": 570.5393730786626
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 28.83907047312967,
+        "final_tracking_error": 83.62687053194902,
+        "first_tenfold_norm_step": 246,
+        "initial_tracking_error": 44.55416923391845,
+        "initial_z_norm": 53.863123694944825,
+        "max_norm_growth": 86.38616524031744,
+        "max_z_norm": 4653.028703871161,
+        "projection_or_clipping_used": false,
+        "seed": 8101,
+        "shear": 5,
+        "steps": 400000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -0.8824403338223169,
+        "tail_log_slope_z_norm": -0.3366051200495184,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 9.94349544519311,
+            "step": 1000,
+            "tracking_error": 985.8368950136415,
+            "z_norm": 1012.2916052862664
+          },
+          {
+            "running_max_ratio": 14.492988862412155,
+            "step": 5000,
+            "tracking_error": 4790.924112612114,
+            "z_norm": 4959.166367104312
+          },
+          {
+            "running_max_ratio": 14.492988862412155,
+            "step": 20000,
+            "tracking_error": 2183.128791368321,
+            "z_norm": 2604.589190687921
+          },
+          {
+            "running_max_ratio": 14.492988862412155,
+            "step": 60000,
+            "tracking_error": 750.8326266260757,
+            "z_norm": 1373.8628541760474
+          },
+          {
+            "running_max_ratio": 14.492988862412155,
+            "step": 400000,
+            "tracking_error": 153.09182003183625,
+            "z_norm": 893.5146623264025
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 14.492988862412155,
+        "final_tracking_error": 153.09182003183625,
+        "first_tenfold_norm_step": 909,
+        "initial_tracking_error": 42.296778681763925,
+        "initial_z_norm": 82.36906294832306,
+        "max_norm_growth": 60.56023535352265,
+        "max_z_norm": 4988.289837999567,
+        "projection_or_clipping_used": false,
+        "seed": 8102,
+        "shear": 5,
+        "steps": 400000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -0.8817120849988488,
+        "tail_log_slope_z_norm": -0.3428006944547984,
+        "valid_counterexample": false
+      }
+    ],
+    "search_cells": [
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 1000,
+            "tracking_error": 2.995700610721462,
+            "z_norm": 7.337016921543708
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 5000,
+            "tracking_error": 0.11994040371318565,
+            "z_norm": 2.4925971048038535
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 20000,
+            "tracking_error": 0.025766991521259774,
+            "z_norm": 0.8452485510816653
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 60000,
+            "tracking_error": 0.006216831352265358,
+            "z_norm": 0.2791480917729143
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 150000,
+            "tracking_error": 0.0020007695662507025,
+            "z_norm": 0.08841594152400815
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 2.3131895848257846,
+        "final_tracking_error": 0.0020007695662507025,
+        "first_tenfold_norm_step": null,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 1,
+        "max_z_norm": 78.66360551772829,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 1,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -1.2691790908694502,
+        "tail_log_slope_z_norm": -1.1167665360803618,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 1000,
+            "tracking_error": 1.0347149961571371,
+            "z_norm": 6.380974265678539
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 5000,
+            "tracking_error": 0.11736552921001947,
+            "z_norm": 2.160531478294925
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 20000,
+            "tracking_error": 0.026426934114761644,
+            "z_norm": 0.7791761946572343
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 60000,
+            "tracking_error": 0.007219073033975244,
+            "z_norm": 0.2915894932471177
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 150000,
+            "tracking_error": 0.005312788834839817,
+            "z_norm": 0.107233134484776
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 0.619559779278254,
+        "final_tracking_error": 0.005312788834839817,
+        "first_tenfold_norm_step": null,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 1,
+        "max_z_norm": 72.35210093594793,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 1,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -0.8088285281870201,
+        "tail_log_slope_z_norm": -0.9813419833185001,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 1000,
+            "tracking_error": 3.0011977066236377,
+            "z_norm": 7.336809023180133
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 5000,
+            "tracking_error": 0.11934222501022355,
+            "z_norm": 2.491354959995426
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 20000,
+            "tracking_error": 0.028586773120971964,
+            "z_norm": 0.8452820698467232
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 60000,
+            "tracking_error": 0.028633336032441184,
+            "z_norm": 0.2820899589301009
+          },
+          {
+            "running_max_ratio": 2.3131895848257846,
+            "step": 150000,
+            "tracking_error": 0.020056699091578836,
+            "z_norm": 0.09134543321363195
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 2.3131895848257846,
+        "final_tracking_error": 0.020056699091578836,
+        "first_tenfold_norm_step": null,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 1,
+        "max_z_norm": 78.66360551772829,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 1,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -0.17006209613417456,
+        "tail_log_slope_z_norm": -1.100826937529753,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 1000,
+            "tracking_error": 1.0316069749075616,
+            "z_norm": 6.383333097374424
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 5000,
+            "tracking_error": 0.12062236829247186,
+            "z_norm": 2.1599006625053447
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 20000,
+            "tracking_error": 0.03973606414057932,
+            "z_norm": 0.7840838432481426
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 60000,
+            "tracking_error": 0.021808546607330344,
+            "z_norm": 0.2946861140415932
+          },
+          {
+            "running_max_ratio": 0.619559779278254,
+            "step": 150000,
+            "tracking_error": 0.009134659539497852,
+            "z_norm": 0.10811344350806026
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 0.619559779278254,
+        "final_tracking_error": 0.009134659539497852,
+        "first_tenfold_norm_step": null,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 1,
+        "max_z_norm": 72.35210093594793,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 1,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -0.7236338162890605,
+        "tail_log_slope_z_norm": -0.9803034254047007,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 28.340108674577962,
+            "step": 1000,
+            "tracking_error": 10788.588640816726,
+            "z_norm": 10978.22553202129
+          },
+          {
+            "running_max_ratio": 28.340108674577962,
+            "step": 5000,
+            "tracking_error": 10080.13737416963,
+            "z_norm": 10841.524593677103
+          },
+          {
+            "running_max_ratio": 28.340108674577962,
+            "step": 20000,
+            "tracking_error": 758.3089368617665,
+            "z_norm": 2212.38625563731
+          },
+          {
+            "running_max_ratio": 28.340108674577962,
+            "step": 60000,
+            "tracking_error": 77.20520990026826,
+            "z_norm": 1332.4135658128273
+          },
+          {
+            "running_max_ratio": 28.340108674577962,
+            "step": 150000,
+            "tracking_error": 37.34548936476526,
+            "z_norm": 908.3499542572306
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 28.340108674577962,
+        "final_tracking_error": 37.34548936476526,
+        "first_tenfold_norm_step": 126,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 187.27357400244148,
+        "max_z_norm": 14731.614549223152,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 5,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -1.513501855756063,
+        "tail_log_slope_z_norm": -0.44245457671799665,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 23.83601007266613,
+            "step": 1000,
+            "tracking_error": 3693.3926103615545,
+            "z_norm": 3741.248768529973
+          },
+          {
+            "running_max_ratio": 23.83601007266613,
+            "step": 5000,
+            "tracking_error": 5040.265483720765,
+            "z_norm": 5344.487437815358
+          },
+          {
+            "running_max_ratio": 23.83601007266613,
+            "step": 20000,
+            "tracking_error": 237.5556699696043,
+            "z_norm": 945.1619944941241
+          },
+          {
+            "running_max_ratio": 23.83601007266613,
+            "step": 60000,
+            "tracking_error": 32.76636208455269,
+            "z_norm": 595.3761661455014
+          },
+          {
+            "running_max_ratio": 23.83601007266613,
+            "step": 150000,
+            "tracking_error": 13.417827342305214,
+            "z_norm": 413.96177256539175
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 23.83601007266613,
+        "final_tracking_error": 13.417827342305214,
+        "first_tenfold_norm_step": 383,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 91.54635214065345,
+        "max_z_norm": 6623.570910398392,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 5,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -1.4386440666779214,
+        "tail_log_slope_z_norm": -0.4100970568718272,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 28.33757512800269,
+            "step": 1000,
+            "tracking_error": 10781.467052814158,
+            "z_norm": 10971.012646612548
+          },
+          {
+            "running_max_ratio": 28.33757512800269,
+            "step": 5000,
+            "tracking_error": 10093.84438199051,
+            "z_norm": 10854.985041714588
+          },
+          {
+            "running_max_ratio": 28.33757512800269,
+            "step": 20000,
+            "tracking_error": 737.3475640816158,
+            "z_norm": 2199.359832066887
+          },
+          {
+            "running_max_ratio": 28.33757512800269,
+            "step": 60000,
+            "tracking_error": 68.89827784642735,
+            "z_norm": 1327.699665003747
+          },
+          {
+            "running_max_ratio": 28.33757512800269,
+            "step": 150000,
+            "tracking_error": 36.65909548885545,
+            "z_norm": 907.2458073119424
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 28.33757512800269,
+        "final_tracking_error": 36.65909548885545,
+        "first_tenfold_norm_step": 126,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 187.24222041020576,
+        "max_z_norm": 14729.148162611958,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 5,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -1.511512708650308,
+        "tail_log_slope_z_norm": -0.44013322273284733,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 23.819269016300495,
+            "step": 1000,
+            "tracking_error": 3684.8100391447456,
+            "z_norm": 3732.573994267604
+          },
+          {
+            "running_max_ratio": 23.819269016300495,
+            "step": 5000,
+            "tracking_error": 5034.008319081556,
+            "z_norm": 5337.57550024486
+          },
+          {
+            "running_max_ratio": 23.819269016300495,
+            "step": 20000,
+            "tracking_error": 246.43962051051645,
+            "z_norm": 949.5440269285821
+          },
+          {
+            "running_max_ratio": 23.819269016300495,
+            "step": 60000,
+            "tracking_error": 4.652481636041291,
+            "z_norm": 605.4851353478849
+          },
+          {
+            "running_max_ratio": 23.819269016300495,
+            "step": 150000,
+            "tracking_error": 13.74656288830804,
+            "z_norm": 416.1499142533721
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 23.819269016300495,
+        "final_tracking_error": 13.74656288830804,
+        "first_tenfold_norm_step": 383,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 91.34492780574602,
+        "max_z_norm": 6608.9974365882135,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 5,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -1.5040276368063326,
+        "tail_log_slope_z_norm": -0.4094221923255236,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 79.56718946346788,
+            "step": 1000,
+            "tracking_error": 119022.31034312575,
+            "z_norm": 119600.11415645211
+          },
+          {
+            "running_max_ratio": 79.56718946346788,
+            "step": 5000,
+            "tracking_error": 1073201.4234861147,
+            "z_norm": 1082679.866170671
+          },
+          {
+            "running_max_ratio": 79.56718946346788,
+            "step": 20000,
+            "tracking_error": 2439587.6156310225,
+            "z_norm": 2486321.7934998083
+          },
+          {
+            "running_max_ratio": 79.56718946346788,
+            "step": 60000,
+            "tracking_error": 1477002.0030289944,
+            "z_norm": 1568858.5916972205
+          },
+          {
+            "running_max_ratio": 79.56718946346788,
+            "step": 150000,
+            "tracking_error": 296232.60934535763,
+            "z_norm": 443572.09366334876
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 79.56718946346788,
+        "final_tracking_error": 296232.60934535763,
+        "first_tenfold_norm_step": 79,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 31811.897162828533,
+        "max_z_norm": 2502438.5291872835,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 15,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -1.027080548947249,
+        "tail_log_slope_z_norm": -0.8411619856046362,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 71.96649098765009,
+            "step": 1000,
+            "tracking_error": 44730.194143770095,
+            "z_norm": 44915.951793374225
+          },
+          {
+            "running_max_ratio": 71.96649098765009,
+            "step": 5000,
+            "tracking_error": 595963.811564368,
+            "z_norm": 600676.3644927734
+          },
+          {
+            "running_max_ratio": 71.96649098765009,
+            "step": 20000,
+            "tracking_error": 1545616.1226275214,
+            "z_norm": 1572970.8716618156
+          },
+          {
+            "running_max_ratio": 71.96649098765009,
+            "step": 60000,
+            "tracking_error": 938292.3135630806,
+            "z_norm": 994532.5404660525
+          },
+          {
+            "running_max_ratio": 71.96649098765009,
+            "step": 150000,
+            "tracking_error": 144580.01542025286,
+            "z_norm": 241364.81015403086
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 71.96649098765009,
+        "final_tracking_error": 144580.01542025286,
+        "first_tenfold_norm_step": 218,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 22019.494427338068,
+        "max_z_norm": 1593156.6833653068,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 15,
+        "steps": 150000,
+        "stickiness": 0.4,
+        "tail_log_slope_tracking": -1.1522404011611171,
+        "tail_log_slope_z_norm": -0.9134473844516491,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 79.56400839101563,
+            "step": 1000,
+            "tracking_error": 118992.03925943546,
+            "z_norm": 119569.72986587921
+          },
+          {
+            "running_max_ratio": 79.56400839101563,
+            "step": 5000,
+            "tracking_error": 1073087.7512466433,
+            "z_norm": 1082564.2267028575
+          },
+          {
+            "running_max_ratio": 79.56400839101563,
+            "step": 20000,
+            "tracking_error": 2439842.1973143043,
+            "z_norm": 2486577.4342389177
+          },
+          {
+            "running_max_ratio": 79.56400839101563,
+            "step": 60000,
+            "tracking_error": 1475470.7039637724,
+            "z_norm": 1567329.8838159118
+          },
+          {
+            "running_max_ratio": 79.56400839101563,
+            "step": 150000,
+            "tracking_error": 295583.02127611794,
+            "z_norm": 442938.6754289667
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 79.56400839101563,
+        "final_tracking_error": 295583.02127611794,
+        "first_tenfold_norm_step": 79,
+        "initial_tracking_error": 78.52020395072228,
+        "initial_z_norm": 78.66360551772829,
+        "max_norm_growth": 31813.82625444506,
+        "max_z_norm": 2502590.2784892134,
+        "projection_or_clipping_used": false,
+        "seed": 7001,
+        "shear": 15,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -1.028218488898646,
+        "tail_log_slope_z_norm": -0.8419294743901831,
+        "valid_counterexample": false
+      },
+      {
+        "all_assumptions_satisfied": true,
+        "assumptions": {
+          "B1_unique_stationary_distribution": true,
+          "B2_robbins_monro_and_timescale_separation": true,
+          "B4_exact_scaling_limit": true,
+          "B5_global_lipschitz": true,
+          "B6_fast_and_reduced_odes_globally_stable": true,
+          "B7_weighted_lln_from_finite_irreducible_bounded_chain": true
+        },
+        "checkpoints": [
+          {
+            "running_max_ratio": 71.95325199232553,
+            "step": 1000,
+            "tracking_error": 44696.55954347879,
+            "z_norm": 44882.20302508393
+          },
+          {
+            "running_max_ratio": 71.95325199232553,
+            "step": 5000,
+            "tracking_error": 595431.6194626547,
+            "z_norm": 600140.1140722372
+          },
+          {
+            "running_max_ratio": 71.95325199232553,
+            "step": 20000,
+            "tracking_error": 1544855.9569691988,
+            "z_norm": 1572190.0356169273
+          },
+          {
+            "running_max_ratio": 71.95325199232553,
+            "step": 60000,
+            "tracking_error": 940106.1633914188,
+            "z_norm": 996312.2252281397
+          },
+          {
+            "running_max_ratio": 71.95325199232553,
+            "step": 150000,
+            "tracking_error": 147925.0924857718,
+            "z_norm": 244177.43311490543
+          }
+        ],
+        "counterexample_reason": "A finite path cannot contradict an almost-sure asymptotic statement.",
+        "dimension_fast": 6,
+        "dimension_slow": 6,
+        "empirical_running_max_K": 71.95325199232553,
+        "final_tracking_error": 147925.0924857718,
+        "first_tenfold_norm_step": 218,
+        "initial_tracking_error": 56.382432778421474,
+        "initial_z_norm": 72.35210093594793,
+        "max_norm_growth": 22010.93950189355,
+        "max_z_norm": 1592537.7165360455,
+        "projection_or_clipping_used": false,
+        "seed": 7002,
+        "shear": 15,
+        "steps": 150000,
+        "stickiness": 0.96,
+        "tail_log_slope_tracking": -1.1409523989511179,
+        "tail_log_slope_z_norm": -0.9075794763693692,
+        "valid_counterexample": false
+      }
+    ],
+    "selection_rule": "promote the largest tail norm slope, breaking ties by maximum norm growth"
+  },
+  "scientific_verdicts": {
+    "1": "BLOCKED",
+    "2": "BLOCKED",
+    "3": "BLOCKED",
+    "4": "BLOCKED"
+  },
+  "source_anchors": {
+    "1": "Theorem 3.2 / #S3.Thmtheorem2",
+    "2": "Theorem 3.3 / #S3.Thmtheorem3",
+    "3": "Lemma 3.1 / #S3.Thmtheorem1",
+    "4": "Definition 7.1 and Theorem 7.2 / #S7.Thmtheorem1 and #S7.Thmtheorem2"
+  },
+  "tdc_search": {
+    "all_assumptions_satisfied": true,
+    "assumptions": {
+      "A_invertible_for_both_lambdas": true,
+      "B2_timescale_separation": true,
+      "F1_behavior_policy_full_support": true,
+      "F1_finite_irreducible_behavior_chain": true,
+      "F2_feature_matrix_full_rank": true,
+      "exact_unprojected_definition_7_1": true
+    },
+    "cells": [
+      {
+        "burn_in": 20000,
+        "features": 10,
+        "final_beta_over_alpha": 0.13992309041049977,
+        "initial_fixed_point_residual": 0.11281092276969798,
+        "lambda": 0.9,
+        "matrix_A_relative_error": 0.2234168794991603,
+        "matrix_C_relative_error": 0.005496691223564263,
+        "matrix_D_relative_error": 0.2022642892197706,
+        "max_eligibility_trace_norm": 2820.823779045833,
+        "max_importance_ratio": 5.021870479358772,
+        "max_parameter_norm": 4.111348118761272,
+        "min_importance_ratio": 0.17406996433078753,
+        "projection_or_clipping_used": false,
+        "residual_reduction": 0.34292738586003946,
+        "seed": 7301,
+        "states": 20,
+        "steps": 160000,
+        "tail_fixed_point_residual_median": 0.03868595484187133,
+        "tail_theta_reference_error_median": 1.2228317036787963,
+        "vector_b_relative_error": 0.10788956714066228
+      },
+      {
+        "burn_in": 20000,
+        "features": 10,
+        "final_beta_over_alpha": 0.13992309041049977,
+        "initial_fixed_point_residual": 0.11281092276969798,
+        "lambda": 0.9,
+        "matrix_A_relative_error": 0.35839004790095924,
+        "matrix_C_relative_error": 0.006940794972594392,
+        "matrix_D_relative_error": 0.32622528228574255,
+        "max_eligibility_trace_norm": 5898.485839375688,
+        "max_importance_ratio": 5.021870479358772,
+        "max_parameter_norm": 2.884113301960272,
+        "min_importance_ratio": 0.17406996433078753,
+        "projection_or_clipping_used": false,
+        "residual_reduction": 0.3676124892611098,
+        "seed": 7302,
+        "states": 20,
+        "steps": 160000,
+        "tail_fixed_point_residual_median": 0.041470704135211485,
+        "tail_theta_reference_error_median": 1.2492605239371073,
+        "vector_b_relative_error": 0.3001669450284576
+      },
+      {
+        "burn_in": 20000,
+        "features": 10,
+        "final_beta_over_alpha": 0.13992309041049977,
+        "initial_fixed_point_residual": 0.14048586039540328,
+        "lambda": 0.97,
+        "matrix_A_relative_error": 0.3959301831798931,
+        "matrix_C_relative_error": 0.005496691223564263,
+        "matrix_D_relative_error": 0.29094153781467746,
+        "max_eligibility_trace_norm": 6239.031255349987,
+        "max_importance_ratio": 5.021870479358772,
+        "max_parameter_norm": 5.995815639217083,
+        "min_importance_ratio": 0.17406996433078753,
+        "projection_or_clipping_used": false,
+        "residual_reduction": 0.23627676433056646,
+        "seed": 7301,
+        "states": 20,
+        "steps": 160000,
+        "tail_fixed_point_residual_median": 0.03319354452842156,
+        "tail_theta_reference_error_median": 0.8627373047777623,
+        "vector_b_relative_error": 0.16944822872965393
+      },
+      {
+        "burn_in": 20000,
+        "features": 10,
+        "final_beta_over_alpha": 0.13992309041049977,
+        "initial_fixed_point_residual": 0.14048586039540328,
+        "lambda": 0.97,
+        "matrix_A_relative_error": 0.6372021658423249,
+        "matrix_C_relative_error": 0.006940794972594392,
+        "matrix_D_relative_error": 0.4710195549206264,
+        "max_eligibility_trace_norm": 12723.052304125082,
+        "max_importance_ratio": 5.021870479358772,
+        "max_parameter_norm": 3.7449602810823346,
+        "min_importance_ratio": 0.17406996433078753,
+        "projection_or_clipping_used": false,
+        "residual_reduction": 0.26371403581231023,
+        "seed": 7302,
+        "states": 20,
+        "steps": 160000,
+        "tail_fixed_point_residual_median": 0.0370480932194366,
+        "tail_theta_reference_error_median": 0.880284170530863,
+        "vector_b_relative_error": 0.39193895388686084
+      }
+    ],
+    "lambdas": [
+      0.9,
+      0.97
+    ],
+    "max_importance_ratio": 5.021870479358772,
+    "max_trace_norm": 12723.052304125082
+  },
+  "valid_counterexample_found": false
+}

@@ -1,5 +1,7 @@
 # Evaluator guide
 
-Run the fixed command and locate `claim_5_source` in the line beginning `ORX_EVIDENCE`. Confirm the exact source hash, all structural booleans, assumption count, and both rejected mutations. The final line must be `ORX_CHECKER {"status": "PASS"}` and the process must exit nonzero after any failed predicate.
+Run the fixed command and locate `claim_5_source` in the line beginning `ORX_EVIDENCE`. Confirm the exact source hash, all structural booleans, assumption count, and both rejected mutations. The final line must report `ORX_CHECKER` as PASS and the process must exit nonzero after any failed predicate.
 
-Pending: the current node has not run. Raw output, actual CPU allocation, runtime, Git SHA, and final verdict will be added by the cumulative publication child after this contract is answered.
+Durable outputs: `raw_results.json`, `independent_checker_output.json`, `claim_verifier.py`, and `runtime_cpu.json`. Negative controls are embedded under `negative_controls` in the raw output.
+
+Final verdict: **VERIFIED, HIGH confidence** on the complete registered source domain. Limitation: this does not assert that every external application satisfies the paper's premises.

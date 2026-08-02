@@ -1,0 +1,911 @@
+{
+  "assumption_audit": {
+    "B1_unique_stationary_distribution": true,
+    "B2_robbins_monro_and_separation": true,
+    "B3_numbering_is_remark": true,
+    "B4_uniform_scaling_limit_certified": true,
+    "B5_global_lipschitz_constants_finite": true,
+    "B6_fast_and_reduced_limit_odes_globally_stable": true,
+    "B7_finite_irreducible_markov_lln_applicable": true
+  },
+  "cells": [
+    {
+      "certified_K": 3.321966558899229,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 1.446500407740625,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.0018700491899107262,
+      "final_tracking_error": 0.0018546238196970872,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.008310431411494954,
+          0.009345611319513477
+        ],
+        "5000": [
+          0.003500569734777608,
+          0.004270266728804502
+        ],
+        "20000": [
+          0.001180075229568676,
+          0.0011982167880241956
+        ],
+        "50000": [
+          0.0013403668315605402,
+          0.0017326032190772246
+        ],
+        "100000": [
+          0.0018546238196970872,
+          0.0018700491899107262
+        ]
+      },
+      "initial_joint_error": 2.7291012147311307,
+      "initial_scale": 1,
+      "initial_tracking_error": 2.7028672337806796,
+      "initial_z_norm": 2.8650685175327393,
+      "joint_reduction": 0.0006852252968180816,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 2.8650685175327393,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.0006861690417190422
+    },
+    {
+      "certified_K": 28.75016977405672,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 0.9134288734225897,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.0013243639919506402,
+      "final_tracking_error": 0.001074780549934868,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.006205914119899753,
+          0.060984841795967464
+        ],
+        "5000": [
+          0.0021708154483010967,
+          0.0034005139042003643
+        ],
+        "20000": [
+          0.0026427427737098033,
+          0.002967893926279264
+        ],
+        "50000": [
+          0.002955270137981661,
+          0.0029884662001036662
+        ],
+        "100000": [
+          0.001074780549934868,
+          0.0013243639919506402
+        ]
+      },
+      "initial_joint_error": 41.25941653761406,
+      "initial_scale": 12,
+      "initial_tracking_error": 28.775555899469058,
+      "initial_z_norm": 41.01163733965424,
+      "joint_reduction": 0.00003209846631600538,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 41.01163733965424,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.00003735047043712191
+    },
+    {
+      "certified_K": 3.321966558899229,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 1.446500407740625,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.004679969660862051,
+      "final_tracking_error": 0.0046835587613061665,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.02282650217666876,
+          0.025421928947566567
+        ],
+        "5000": [
+          0.011021807449613117,
+          0.011716826785636333
+        ],
+        "20000": [
+          0.009101641710110651,
+          0.009863910714693874
+        ],
+        "50000": [
+          0.005014356014643066,
+          0.005196924073705277
+        ],
+        "100000": [
+          0.0046835587613061665,
+          0.004679969660862051
+        ]
+      },
+      "initial_joint_error": 2.7291012147311307,
+      "initial_scale": 1,
+      "initial_tracking_error": 2.7028672337806796,
+      "initial_z_norm": 2.8650685175327393,
+      "joint_reduction": 0.0017148391696139853,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 2.8650685175327393,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.0017328112542009555
+    },
+    {
+      "certified_K": 28.75016977405672,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 0.9134288734225897,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.004044810594109235,
+      "final_tracking_error": 0.003559296827612715,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.015271587608987855,
+          0.06606401755667693
+        ],
+        "5000": [
+          0.008188502785165256,
+          0.010907387256608553
+        ],
+        "20000": [
+          0.006668289685845325,
+          0.00739516051369492
+        ],
+        "50000": [
+          0.004186266694917147,
+          0.0050713129628470344
+        ],
+        "100000": [
+          0.003559296827612715,
+          0.004044810594109235
+        ]
+      },
+      "initial_joint_error": 41.25941653761406,
+      "initial_scale": 12,
+      "initial_tracking_error": 28.775555899469058,
+      "initial_z_norm": 41.01163733965424,
+      "joint_reduction": 0.00009803363531381478,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 41.01163733965424,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.00012369167914766117
+    },
+    {
+      "certified_K": 3.321966558899229,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 1.446500407740625,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.01297551026241532,
+      "final_tracking_error": 0.012531349559082016,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.034143648146374286,
+          0.04012376274958674
+        ],
+        "5000": [
+          0.02054169473636986,
+          0.02480236916587454
+        ],
+        "20000": [
+          0.021898545077543644,
+          0.02288834769337199
+        ],
+        "50000": [
+          0.016104743938142575,
+          0.016213641480873106
+        ],
+        "100000": [
+          0.012531349559082016,
+          0.01297551026241532
+        ]
+      },
+      "initial_joint_error": 2.7291012147311307,
+      "initial_scale": 1,
+      "initial_tracking_error": 2.7028672337806796,
+      "initial_z_norm": 2.8650685175327393,
+      "joint_reduction": 0.004754499463917339,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 2.8650685175327393,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.004636317094108091
+    },
+    {
+      "certified_K": 28.75016977405672,
+      "dimension_fast": 8,
+      "dimension_slow": 8,
+      "empirical_K": 0.9134288734225897,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.011565007337302884,
+      "final_tracking_error": 0.011020364993264562,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.0546821300163784,
+          0.07588367483906126
+        ],
+        "5000": [
+          0.027217557591495172,
+          0.03200937720786913
+        ],
+        "20000": [
+          0.015043038272516567,
+          0.016865043713897472
+        ],
+        "50000": [
+          0.01322905577289335,
+          0.013671486854522429
+        ],
+        "100000": [
+          0.011020364993264562,
+          0.011565007337302884
+        ]
+      },
+      "initial_joint_error": 41.25941653761406,
+      "initial_scale": 12,
+      "initial_tracking_error": 28.775555899469058,
+      "initial_z_norm": 41.01163733965424,
+      "joint_reduction": 0.0002802998274771935,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 41.01163733965424,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.00038297661500495635
+    },
+    {
+      "certified_K": 5.59376259359918,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.733830886298123,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.0020288623845881953,
+      "final_tracking_error": 0.0018723410215827083,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.008210126601159032,
+          0.015212999884889644
+        ],
+        "5000": [
+          0.006120757473922289,
+          0.006850102081098446
+        ],
+        "20000": [
+          0.002519054232309267,
+          0.002679560605085419
+        ],
+        "50000": [
+          0.002745540797358303,
+          0.0029509797725099933
+        ],
+        "100000": [
+          0.0018723410215827083,
+          0.0020288623845881953
+        ]
+      },
+      "initial_joint_error": 7.786644830369503,
+      "initial_scale": 1,
+      "initial_tracking_error": 5.113182169880851,
+      "initial_z_norm": 7.646762381342595,
+      "joint_reduction": 0.00026055668760891957,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 7.646762381342595,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.0003661792127438202
+    },
+    {
+      "certified_K": 57.80042137059012,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.783052207131807,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.002038932653425637,
+      "final_tracking_error": 0.001777420144840034,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.010590791021234508,
+          0.1416256335945603
+        ],
+        "5000": [
+          0.0031746621715194718,
+          0.0035781001453878275
+        ],
+        "20000": [
+          0.0024360019877628872,
+          0.0027255970496105055
+        ],
+        "50000": [
+          0.0025881698515812413,
+          0.002798517854235387
+        ],
+        "100000": [
+          0.001777420144840034,
+          0.002038932653425637
+        ]
+      },
+      "initial_joint_error": 91.85036190176466,
+      "initial_scale": 12,
+      "initial_tracking_error": 59.63022739979863,
+      "initial_z_norm": 91.98323918459182,
+      "joint_reduction": 0.00002219841719955667,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 91.98323918459182,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.00002980736821483321
+    },
+    {
+      "certified_K": 5.59376259359918,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.733830886298123,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.007360592711603533,
+      "final_tracking_error": 0.007153476101612758,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.02494712779364827,
+          0.029655075507701224
+        ],
+        "5000": [
+          0.013786639675470686,
+          0.015536739905126544
+        ],
+        "20000": [
+          0.007436616859464995,
+          0.008724484347836362
+        ],
+        "50000": [
+          0.00650962207398474,
+          0.006932306584678784
+        ],
+        "100000": [
+          0.007153476101612758,
+          0.007360592711603533
+        ]
+      },
+      "initial_joint_error": 7.786644830369503,
+      "initial_scale": 1,
+      "initial_tracking_error": 5.113182169880851,
+      "initial_z_norm": 7.646762381342595,
+      "joint_reduction": 0.0009452842491153212,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 7.646762381342595,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.0013990262548731862
+    },
+    {
+      "certified_K": 57.80042137059012,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.783052207131807,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.003815333590590232,
+      "final_tracking_error": 0.003403754876612384,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.020785127327564382,
+          0.1449192121438642
+        ],
+        "5000": [
+          0.015246910312650864,
+          0.01647523017947691
+        ],
+        "20000": [
+          0.005958189328978818,
+          0.0070058122621892045
+        ],
+        "50000": [
+          0.007835990645313902,
+          0.008195700501018126
+        ],
+        "100000": [
+          0.003403754876612384,
+          0.003815333590590232
+        ]
+      },
+      "initial_joint_error": 91.85036190176466,
+      "initial_scale": 12,
+      "initial_tracking_error": 59.63022739979863,
+      "initial_z_norm": 91.98323918459182,
+      "joint_reduction": 0.00004153857983347729,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 91.98323918459182,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.000057081031299637115
+    },
+    {
+      "certified_K": 5.59376259359918,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.733830886298123,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.014249895373310915,
+      "final_tracking_error": 0.012933916257167515,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.0494318728302652,
+          0.05977543861621431
+        ],
+        "5000": [
+          0.03294194895633753,
+          0.03597212360281843
+        ],
+        "20000": [
+          0.02019235272431849,
+          0.021883549768833055
+        ],
+        "50000": [
+          0.015883722171530643,
+          0.01697180252506045
+        ],
+        "100000": [
+          0.012933916257167515,
+          0.014249895373310915
+        ]
+      },
+      "initial_joint_error": 7.786644830369503,
+      "initial_scale": 1,
+      "initial_tracking_error": 5.113182169880851,
+      "initial_z_norm": 7.646762381342595,
+      "joint_reduction": 0.0018300430652408105,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 7.646762381342595,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.002529523851771725
+    },
+    {
+      "certified_K": 57.80042137059012,
+      "dimension_fast": 32,
+      "dimension_slow": 32,
+      "empirical_K": 0.783052207131807,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.013602176938570963,
+      "final_tracking_error": 0.01290282809195122,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.05076290717867975,
+          0.15516685462472402
+        ],
+        "5000": [
+          0.02354496792796449,
+          0.027019412952735525
+        ],
+        "20000": [
+          0.01827062339652443,
+          0.020274695443784276
+        ],
+        "50000": [
+          0.016768578999337397,
+          0.017317905742601124
+        ],
+        "100000": [
+          0.01290282809195122,
+          0.013602176938570963
+        ]
+      },
+      "initial_joint_error": 91.85036190176466,
+      "initial_scale": 12,
+      "initial_tracking_error": 59.63022739979863,
+      "initial_z_norm": 91.98323918459182,
+      "joint_reduction": 0.00014809061888203224,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 91.98323918459182,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.00021638066220077494
+    },
+    {
+      "certified_K": 8.252391813923515,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.8697062953602298,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.0024487858085208143,
+      "final_tracking_error": 0.002300555425494138,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.006698363734017746,
+          0.01847484605739066
+        ],
+        "5000": [
+          0.006970166804567833,
+          0.0078530055320668
+        ],
+        "20000": [
+          0.0033465601744056077,
+          0.003484108700224359
+        ],
+        "50000": [
+          0.003613069191005747,
+          0.0037358495100322303
+        ],
+        "100000": [
+          0.002300555425494138,
+          0.0024487858085208143
+        ]
+      },
+      "initial_joint_error": 11.132291244460804,
+      "initial_scale": 1,
+      "initial_tracking_error": 8.011739300246811,
+      "initial_z_norm": 10.917586622337787,
+      "joint_reduction": 0.0002199714106239611,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 10.917586622337787,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.00028714806352014805
+    },
+    {
+      "certified_K": 92.58886861717275,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.9979213019745043,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.0021881640166284944,
+      "final_tracking_error": 0.0020136842754844985,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.01698923562981285,
+          0.18974995133040382
+        ],
+        "5000": [
+          0.0035939218031785366,
+          0.004274307110636084
+        ],
+        "20000": [
+          0.003524844664815155,
+          0.0038111886590338016
+        ],
+        "50000": [
+          0.0029312554826955626,
+          0.003135830884519945
+        ],
+        "100000": [
+          0.0020136842754844985,
+          0.0021881640166284944
+        ]
+      },
+      "initial_joint_error": 129.4746638895706,
+      "initial_scale": 12,
+      "initial_tracking_error": 92.75257665891255,
+      "initial_z_norm": 129.5135833004559,
+      "joint_reduction": 0.000016900325908509694,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 129.5135833004559,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.32164715731432947,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.2,
+      "tracking_reduction": 0.00002171027854988441
+    },
+    {
+      "certified_K": 8.252391813923515,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.8697062953602298,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.007658010729808656,
+      "final_tracking_error": 0.007443311442326447,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.0266813184262293,
+          0.03600363581949233
+        ],
+        "5000": [
+          0.012192296627277716,
+          0.013712756080372344
+        ],
+        "20000": [
+          0.0068946941923484825,
+          0.008100216149173193
+        ],
+        "50000": [
+          0.008301691726808991,
+          0.008741040208314448
+        ],
+        "100000": [
+          0.007443311442326447,
+          0.007658010729808656
+        ]
+      },
+      "initial_joint_error": 11.132291244460804,
+      "initial_scale": 1,
+      "initial_tracking_error": 8.011739300246811,
+      "initial_z_norm": 10.917586622337787,
+      "joint_reduction": 0.0006879096640252852,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 10.917586622337787,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.0009290506297549082
+    },
+    {
+      "certified_K": 92.58886861717275,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.9979213019745043,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.004280658068393357,
+      "final_tracking_error": 0.0038719502542116117,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.03185805576375572,
+          0.19130210822841368
+        ],
+        "5000": [
+          0.014998240800228404,
+          0.017026836472403818
+        ],
+        "20000": [
+          0.00727404400822511,
+          0.008275778107706001
+        ],
+        "50000": [
+          0.006134050894549987,
+          0.006614221042640112
+        ],
+        "100000": [
+          0.0038719502542116117,
+          0.004280658068393357
+        ]
+      },
+      "initial_joint_error": 129.4746638895706,
+      "initial_scale": 12,
+      "initial_tracking_error": 92.75257665891255,
+      "initial_z_norm": 129.5135833004559,
+      "joint_reduction": 0.00003306174304529839,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 129.5135833004559,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.09356491342718953,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.78,
+      "tracking_reduction": 0.00004174493468197962
+    },
+    {
+      "certified_K": 8.252391813923515,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.8697062953602298,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.011933201791533786,
+      "final_tracking_error": 0.010889842301744257,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.04842277991562056,
+          0.06133561643623946
+        ],
+        "5000": [
+          0.02804224988407873,
+          0.031134800349220903
+        ],
+        "20000": [
+          0.014793683715772684,
+          0.017609384419228415
+        ],
+        "50000": [
+          0.01622730509378744,
+          0.017227474959257107
+        ],
+        "100000": [
+          0.010889842301744257,
+          0.011933201791533786
+        ]
+      },
+      "initial_joint_error": 11.132291244460804,
+      "initial_scale": 1,
+      "initial_tracking_error": 8.011739300246811,
+      "initial_z_norm": 10.917586622337787,
+      "joint_reduction": 0.001071944807181675,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 10.917586622337787,
+      "projection_or_clipping_used": false,
+      "seed": 4101,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.0013592357281781227
+    },
+    {
+      "certified_K": 92.58886861717275,
+      "dimension_fast": 64,
+      "dimension_slow": 64,
+      "empirical_K": 0.9979213019745043,
+      "final_beta_over_alpha": 0.09626401013105458,
+      "final_joint_error": 0.013588991124488012,
+      "final_tracking_error": 0.012608170471120624,
+      "horizon_errors_tracking_joint": {
+        "1000": [
+          0.05289995552500261,
+          0.20690440119916084
+        ],
+        "5000": [
+          0.027295285790446853,
+          0.03061744860967435
+        ],
+        "20000": [
+          0.02435962564927571,
+          0.0261070288672663
+        ],
+        "50000": [
+          0.015921419401535537,
+          0.016624134635448498
+        ],
+        "100000": [
+          0.012608170471120624,
+          0.013588991124488012
+        ]
+      },
+      "initial_joint_error": 129.4746638895706,
+      "initial_scale": 12,
+      "initial_tracking_error": 92.75257665891255,
+      "initial_z_norm": 129.5135833004559,
+      "joint_reduction": 0.00010495482835219493,
+      "markov_states": 17,
+      "max_norm_growth": 1,
+      "max_z_norm": 129.5135833004559,
+      "projection_or_clipping_used": false,
+      "seed": 4102,
+      "spectral_gap": 0.017208150724104976,
+      "stationarity_residual": 7.632783294297951e-17,
+      "steps": 100000,
+      "stickiness": 0.96,
+      "tracking_reduction": 0.00013593337161387756
+    }
+  ],
+  "claim_contracts": {
+    "1": "Under B.1-B.7, unprojected two-timescale iterates satisfy sup_n ||z_n|| < infinity almost surely.",
+    "2": "Under B.1-B.7, ||x_n-lambda(y_n)|| tends to zero and z_n converges to (lambda(y*),y*) almost surely.",
+    "3": "Under Appendix B assumptions, a sample-path finite K bounds ||x_n||/(1+||y_n^max||) for every n.",
+    "5": "The theorem premises include the complete Appendix B assumption set; B.3 is rendered as a remark rather than an assumption."
+  },
+  "design": {
+    "cells": 18,
+    "dimensions": [
+      8,
+      32,
+      64
+    ],
+    "initial_scales": [
+      1,
+      12
+    ],
+    "markov_stickiness": [
+      0.2,
+      0.78,
+      0.96
+    ],
+    "nonlinear_equilibrium_map": "diag*y + 0.025*roll(y,1) + q + 0.06*abs(y)",
+    "seeds": [
+      4101,
+      4102
+    ],
+    "steps_per_cell": 100000
+  },
+  "experimental_assessment": "ALIGNED",
+  "limitation": "The symbolic certificates cover the constructed nonlinear family, not every function and Markov process quantified by the paper's general theorem.",
+  "negative_controls": {
+    "equal_timescales": {
+      "accepted": false,
+      "reason": "B.2 violated"
+    },
+    "projection_enabled": {
+      "accepted": false,
+      "reason": "unprojected algorithm contract violated"
+    },
+    "reducible_chain": {
+      "accepted": false,
+      "reason": "B.1 violated"
+    },
+    "unstable_fast_ode": {
+      "accepted": false,
+      "reason": "B.6 violated"
+    }
+  },
+  "scientific_verdicts": {
+    "1": "BLOCKED",
+    "2": "BLOCKED",
+    "3": "BLOCKED",
+    "5": "BLOCKED"
+  },
+  "summary": {
+    "max_empirical_K": 1.446500407740625,
+    "max_joint_reduction": 0.004754499463917339,
+    "max_norm_growth": 1,
+    "max_tracking_reduction": 0.004636317094108091,
+    "max_z_norm": 129.5135833004559,
+    "min_certificate_slack": 1.875466151158604
+  },
+  "symbolic_certificates": {
+    "fast_ode": "d/dt ||x-lambda(y)||^2 = -2||x-lambda(y)||^2 for fixed y",
+    "infinity_fast_ode": "dx/dt = -(x-My-0.06*abs(y)); for fixed y the x-Jacobian is -I",
+    "infinity_reduced_slow_ode": "dy/dt = -y, with eigenvalues -1",
+    "reduced_slow_ode": "at x=lambda(y), dy/dt = -(y-y*)",
+    "running_max_bound": "contractive fast recursion gives ||x_n|| <= K(1+max_{m<=n}||y_m||); each cell records a conservative certified K"
+  }
+}

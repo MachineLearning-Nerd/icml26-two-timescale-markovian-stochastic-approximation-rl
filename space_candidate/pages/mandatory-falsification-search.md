@@ -1,6 +1,6 @@
 # Claims 1–4 — mandatory falsification route
 
-**Current verdicts: pending the fourth-route HF run.**
+**Current verdicts: BLOCKED. The fourth route found no valid counterexample.**
 
 This route searches for a counterexample only after three materially different verification attempts left the universal claims LOW-confidence. It restates the exact claims and screens every candidate against the registered assumptions before interpreting its behavior.
 
@@ -11,3 +11,5 @@ For Claim 4, the exact Definition 7.1 TDC update runs at `lambda=0.90` and `0.97
 A deliberately unstable ODE must trigger the detector but is rejected for violating B.6. Rank-deficient and projected TDC variants are also rejected. A finite anomaly, overflow, or slow convergence is not a counterexample to an almost-sure asymptotic theorem.
 
 Fixed command: `uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py`. Environment: Python 3.12 `uv.lock`. Compute: HF `cpu-upgrade`, estimated one core/~15 minutes, selected 8 vCPU/32 GB, no GPU.
+
+The worst search transient grew 31,813.83×, but both 400,000-step holdouts had negative joint-norm and tracking tail slopes. Positive-λ TDC stress cells reduced residuals to .2363–.3676. Finite paths did not contradict the exact almost-sure claims, so Claims 1–4 remain BLOCKED.

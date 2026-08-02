@@ -1,0 +1,73 @@
+{
+  "audit": {
+    "checks": {
+      "claim_1_dependency_graph_places_claim_3_before_slow_stability": true,
+      "claim_1_terminal_contradiction": true,
+      "claim_2_fast_limit_present": true,
+      "claim_2_joint_limit_present": true,
+      "claim_2_uses_stability": true,
+      "claim_3_terminal_running_max_bound": true,
+      "claim_4_checks_slow_ode_definiteness": true,
+      "claim_4_definition_has_no_projection_operator": true,
+      "claim_4_exact_trace_recursion_present": true,
+      "claim_4_uses_theorem_3_3": true,
+      "claim_4_uses_yu_invariance": true,
+      "four_proof_regions_found_in_order": true,
+      "paper_has_one_explicitly_omitted_technical_proof": true,
+      "yu_identifies_tdc_as_gtdb": true,
+      "yu_two_timescale_gtdb_is_constrained": true,
+      "yu_unconstrained_result_is_single_timescale_gtda": true
+    },
+    "region_character_counts": {
+      "lemma_3_1": 31980,
+      "theorem_3_2": 19519,
+      "theorem_3_3": 24350,
+      "theorem_7_2": 10188
+    }
+  },
+  "confidence": {
+    "1": "LOW",
+    "2": "LOW",
+    "3": "LOW",
+    "4": "LOW"
+  },
+  "formal_proof_certificate_present": false,
+  "negative_controls": {
+    "claim_3_terminal_removed": {
+      "accepted": false,
+      "reason": "Lemma 3.1 terminal bound missing"
+    },
+    "tdc_to_main_theorem_edge_removed": {
+      "accepted": false,
+      "reason": "Theorem 7.2 dependency missing"
+    },
+    "yu_scope_statement_removed": {
+      "accepted": false,
+      "reason": "primary-source scope evidence missing"
+    }
+  },
+  "open_obligations": [
+    "The dependency graph and terminal equations are source-level checks, not a kernel-checked proof of the analytic arguments.",
+    "The paper explicitly omits one technical-lemma proof and cites Liu et al. (2025) for the analogous argument.",
+    "The Yu (2017) comparison is a two-source primary audit, not an exhaustive priority search over all prior literature."
+  ],
+  "paper_source": {
+    "bytes": 78416,
+    "sha256": "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd",
+    "url": "https://export.arxiv.org/e-print/2605.31172v1"
+  },
+  "retrieved_at_utc": "2026-08-02T10:27:21.761384+00:00",
+  "route": 3,
+  "scientific_verdicts": {
+    "1": "BLOCKED",
+    "2": "BLOCKED",
+    "3": "BLOCKED",
+    "4": "BLOCKED"
+  },
+  "user_agent": "OpenResearch-Reproduction/1.0 (proof dependency verifier)",
+  "yu_2017_source": {
+    "bytes": 102710,
+    "sha256": "fa48127d46d01abfc81bf2e737815f9afed5cdae63f5de37993d722c7c002acd",
+    "url": "https://export.arxiv.org/e-print/1712.09652v2"
+  }
+}

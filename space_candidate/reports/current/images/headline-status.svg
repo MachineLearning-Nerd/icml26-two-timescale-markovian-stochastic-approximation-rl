@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" role="img" aria-labelledby="title desc">
+  <title id="title">Claim status after the reproduction campaign</title>
+  <desc id="desc">Claim 5 is verified on the complete source domain. Claims 1 through 4 are blocked after four routes because finite evidence is not a proof of universal almost-sure statements.</desc>
+  <rect width="1100" height="500" class="canvas"/>
+  <style>
+    .canvas{fill:#fff}text{font-family:system-ui,sans-serif;fill:#172033}.title{font-size:28px;font-weight:600}.sub{font-size:17px;fill:#4b5563}.label{font-size:18px;font-weight:600}.note{font-size:15px;fill:#4b5563}.blocked{fill:#f59e0b}.verified{fill:#16a34a}.track{fill:#e5e7eb}.status{font-size:15px;font-weight:600;fill:white}
+    @media(prefers-color-scheme:dark){.canvas{fill:#0f172a}text{fill:#f3f4f6}.sub,.note{fill:#cbd5e1}.track{fill:#334155}}
+  </style>
+  <text x="48" y="48" class="title">Evidence endpoint — not a judge result</text>
+  <text x="48" y="78" class="sub">Previous live score: 5/10 · conservative forecast: 5–6/10 · best-supported possible: 6/10</text>
+  <g transform="translate(48,112)">
+    <text x="0" y="28" class="label">Claim 1 · stability</text><rect x="310" y="8" width="650" height="30" rx="5" class="track"/><rect x="310" y="8" width="520" height="30" rx="5" class="blocked"/><text x="842" y="29" class="status">BLOCKED</text><text x="310" y="58" class="note">Four routes; severe nonnormal transients decayed in holdouts</text>
+    <text x="0" y="98" class="label">Claim 2 · convergence</text><rect x="310" y="78" width="650" height="30" rx="5" class="track"/><rect x="310" y="78" width="520" height="30" rx="5" class="blocked"/><text x="842" y="99" class="status">BLOCKED</text><text x="310" y="128" class="note">Finite tracking evidence cannot establish an almost-sure limit</text>
+    <text x="0" y="168" class="label">Claim 3 · running max</text><rect x="310" y="148" width="650" height="30" rx="5" class="track"/><rect x="310" y="148" width="520" height="30" rx="5" class="blocked"/><text x="842" y="169" class="status">BLOCKED</text><text x="310" y="198" class="note">Family certificate is not a universal sample-path proof</text>
+    <text x="0" y="238" class="label">Claim 4 · TDC(λ)</text><rect x="310" y="218" width="650" height="30" rx="5" class="track"/><rect x="310" y="218" width="520" height="30" rx="5" class="blocked"/><text x="842" y="239" class="status">BLOCKED</text><text x="310" y="268" class="note">Exact positive-λ algorithm aligned; priority/proof remain unresolved</text>
+    <text x="0" y="308" class="label">Claim 5 · assumptions</text><rect x="310" y="288" width="650" height="30" rx="5" class="track"/><rect x="310" y="288" width="650" height="30" rx="5" class="verified"/><text x="842" y="309" class="status">VERIFIED</text><text x="310" y="338" class="note">Exhaustive hash-pinned audit of the registered TeX source</text>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520" role="img" aria-labelledby="title desc">
+  <title id="title">High-ratio TDC lambda stress results</title>
+  <desc id="desc">Four positive-lambda exact TDC runs reduce fixed-point residual while eligibility trace maxima reach 12723.</desc>
+  <rect width="1100" height="520" class="canvas"/>
+  <style>
+    .canvas{fill:#fff}text{font-family:system-ui,sans-serif;fill:#172033}.title{font-size:27px;font-weight:600}.sub{font-size:16px;fill:#4b5563}.axis{stroke:#64748b}.grid{stroke:#cbd5e1}.bar1{fill:#2563eb}.bar2{fill:#7c3aed}.label{font-size:15px}.value{font-size:14px;font-weight:600}
+    @media(prefers-color-scheme:dark){.canvas{fill:#0f172a}text{fill:#f3f4f6}.sub{fill:#cbd5e1}.grid{stroke:#475569}.axis{stroke:#94a3b8}}
+  </style>
+  <text x="50" y="42" class="title">Exact TDC(λ) under high importance ratios</text>
+  <text x="50" y="70" class="sub">20 states · 10 features · 160k steps · max ρ=5.02 · no projection</text>
+  <text x="70" y="112" class="label">Tail residual / initial residual (lower is better)</text>
+  <line x1="70" y1="320" x2="520" y2="320" class="axis"/>
+  <line x1="70" y1="150" x2="520" y2="150" class="grid"/><text x="38" y="155" class="label">0.5</text>
+  <rect x="105" y="203" width="70" height="117" class="bar1"/><text x="114" y="194" class="value">.343</text>
+  <rect x="205" y="195" width="70" height="125" class="bar1"/><text x="214" y="186" class="value">.368</text>
+  <rect x="335" y="240" width="70" height="80" class="bar2"/><text x="344" y="231" class="value">.236</text>
+  <rect x="435" y="230" width="70" height="90" class="bar2"/><text x="444" y="221" class="value">.264</text>
+  <text x="105" y="345" class="label">λ=.90</text><text x="335" y="345" class="label">λ=.97</text>
+  <text x="610" y="112" class="label">Maximum eligibility-trace norm</text>
+  <line x1="610" y1="320" x2="1030" y2="320" class="axis"/>
+  <rect x="640" y="273" width="65" height="47" class="bar1"/><text x="647" y="264" class="value">2,821</text>
+  <rect x="730" y="222" width="65" height="98" class="bar1"/><text x="737" y="213" class="value">5,898</text>
+  <rect x="850" y="216" width="65" height="104" class="bar2"/><text x="857" y="207" class="value">6,239</text>
+  <rect x="940" y="108" width="65" height="212" class="bar2"/><text x="943" y="99" class="value">12,723</text>
+  <text x="70" y="400" class="sub">All encoded F/B premises passed. The stress result is aligned with convergence.</text>
+  <text x="70" y="425" class="sub">Finite paths cannot verify Theorem 7.2's almost-sure quantifier.</text>
+</svg>
