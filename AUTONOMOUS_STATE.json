@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "openreview_id": "Iww9TICvKj",
+  "paper_title": "Convergence of Two-Timescale Markovian Stochastic Approximations with Applications in Reinforcement Learning",
+  "phase": "documentation_and_branch_normalization",
+  "next_action": "normalize_github_repository_and_verify_remote_state",
+  "active_run_ids": [],
+  "completed_milestones": [
+    "source_snapshot_pinned",
+    "historical_baseline_labeled",
+    "claims_1_to_4_finite_evidence_published",
+    "claim_5_source_domain_verified",
+    "proof_and_falsification_routes_recorded",
+    "publication_revision_postchecked",
+    "claim_ledger_and_branch_audit_written"
+  ],
+  "claim_statuses": {
+    "1": "BLOCKED",
+    "2": "BLOCKED",
+    "3": "BLOCKED",
+    "4": "BLOCKED",
+    "5": "VERIFIED_SOURCE_DOMAIN_ONLY"
+  },
+  "publication_allowed": true,
+  "former_repository": "icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic",
+  "target_repository": "icml26-two-timescale-markovian-stochastic-approximation-rl",
+  "canonical_branch": "main",
+  "registered_source_sha256": "5cdcc002ca92551c2ab4e0753e8a454ed18e04e9162e9a08257ed88bbee8e3fd",
+  "published_huggingface_revision": "bec3336591285a901d33d2abba824f6e2bc31d8c",
+  "historical_judged_head": "ba24d26d274d66c8cdb627aa5a324b47d189dfe0",
+  "historical_live_score": "5/10",
+  "evidence_generating_commit": "7f24f1dce0b64a254d51e483a4b3f581f4610a6a",
+  "last_checkpoint": "2026-08-13T00:00:00Z",
+  "last_known_git_commit": "4a66b0196028c48a3fc88b38e30eda28fc08d944"
+}

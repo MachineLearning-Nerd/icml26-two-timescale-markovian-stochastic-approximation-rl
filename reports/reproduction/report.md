@@ -2,7 +2,7 @@
 
 ![Claim status after the campaign](images/headline-status.svg)
 
-Previous live judged score: **5/10**. Conservative projected score range after this proposed change: **5–6/10**. Best-supported possible new score: **6/10**, explicitly a forecast rather than a judge result.
+Previous live judged score: **5/10**. Conservative projected score range for the current release: **5–6/10**. Best-supported possible new score: **6/10**, explicitly a forecast rather than a judge result.
 
 The paper asks whether two coupled stochastic-approximation recursions remain stable and converge when their noise is Markovian, without using projection to force boundedness. Its key device is a sample-path bound tying the fast iterate to the running maximum of the slow iterate; the theory is then applied to off-policy TDC with genuine eligibility traces.
 
@@ -72,20 +72,11 @@ The evidence-generating revision is `7f24f1dce0b64a254d51e483a4b3f581f4610a6a`. 
 
 The selected HF flavor was `cpu-upgrade` (8 vCPU/32 GB advertised); the jobs reported 64 logical/affinity CPUs and zero GPU devices. The frozen release-candidate run completed in 15m02s with 878.234 seconds inside the scientific/audit payload. Across all 15 submitted jobs through post-publication verification, including setup and evidence-plumbing repairs, the campaign consumed about 2.406 HF job-hours—approximately $0.0722 at $0.03/hour. No GPU job was submitted.
 
-Important experiment branches:
-
-- [Historical judged baseline reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/historical-judged-baseline-reconstruction)
-- [Exact TDC traces](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/exact-tdc-traces-and-cumulative-verifier)
-- [Nonlinear SA certificates](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/nonlinear-sa-scaling-and-assumption-certificates)
-- [Hash-pinned Appendix B verifier](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/hash-pinned-assumption-source-verifier)
-- [Proof dependency reconstruction](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/proof-dependency-reconstruction)
-- [Mandatory falsification search](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/mandatory-falsification-search)
-- [Evaluator-visible release candidate](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/evaluator-visible-release-candidate)
-- [Post-publication exact-revision audit](https://github.com/MachineLearning-Nerd/icml26-repro-Iww9TICvKj-convergence-of-two-timescale-markovian-stochastic-approximations-with-applic/tree/orx/post-publication-exact-revision-audit)
+Important experiment branches and their exact tips are preserved in [the internal branch audit](../../evidence/branch-audit.md). The normalized repository keeps only main as a public branch; the raw JSON contracts and this report remain the scientific provenance layer.
 
 ## Publication and integrity
 
-The winning release branch is `orx/evaluator-visible-release-candidate` at Git `e1ddb9a44ebc37743b6d0f94b5300612910a2c38`. Exactly 32 UTF-8 text paths were committed additively to the existing Space; the protected judged head was `ba24d26d274d66c8cdb627aa5a324b47d189dfe0`, and the published head is `bec3336591285a901d33d2abba824f6e2bc31d8c`.
+The winning release candidate was e1ddb9a44ebc37743b6d0f94b5300612910a2c38. Exactly 32 UTF-8 text paths were committed additively to the existing Space; the protected judged head was ba24d26d274d66c8cdb627aa5a324b47d189dfe0, and the published head is bec3336591285a901d33d2abba824f6e2bc31d8c.
 
 The independent post-publication HF run downloaded that immutable revision and confirmed all 32 published texts byte-for-byte, all 17 judged evidence hashes, current-verifier-first navigation, complete canonical traversal, and no missing files. The three intentionally updated canonical files preserve their judged bytes under `historical/judged/`; all other judged paths are unchanged.
 
