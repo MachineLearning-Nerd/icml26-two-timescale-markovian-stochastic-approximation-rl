@@ -33,11 +33,11 @@
 
 ## Execution
 
-- Current phase: documentation_and_branch_normalization
-- Next action: normalize GitHub repository and verify remote state
+- Current phase: published_and_verified
+- Next action: select the next repository from ICML2026_REPOSITORIES.md
 - Compute: Hugging Face cpu-upgrade; 8 vCPU/32 GB advertised; no GPU
 - Fixed command: uv sync --frozen --no-dev && uv run --frozen python reproduction/runner.py
-- Publication status: immutable artifact and manifest already published; repository documentation cleanup in progress
+- Publication status: immutable artifact and manifest already published; normalized GitHub repository publication is complete
 
 ## Interpretation
 
